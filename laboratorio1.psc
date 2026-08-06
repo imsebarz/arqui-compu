@@ -122,138 +122,255 @@ Proceso CalculadoraVonNeumann
 
             Mientras finalizado = Falso Hacer
 
-                Limpiar Pantalla
+    Limpiar Pantalla
 
-                Escribir "==============================================="
-                Escribir "PASO ", paso
-                Escribir "==============================================="
+    Escribir "======================================================"
+    Escribir "       SIMULACION DE ARQUITECTURA VON NEUMANN"
+    Escribir "======================================================"
+    Escribir ""
+    Escribir "PASO ", paso
+    Escribir ""
 
-                // FETCH: buscar instrucción
-                Escribir ""
-                Escribir "1. BUSQUEDA DE INSTRUCCION (FETCH)"
-                Escribir "Unidad de control:"
-                Escribir "PC = ", PC
-                Escribir "PC --> MAR"
-                MAR <- PC
+    // ---------------------------------------------
+    // 1. BUSQUEDA DE LA INSTRUCCION
+    // ---------------------------------------------
+    Escribir "------------------------------------------------------"
+    Escribir "1. UNIDAD DE CONTROL: BUSQUEDA DE INSTRUCCION"
+    Escribir "------------------------------------------------------"
+    Escribir ""
+    Escribir "El Contador de Programa (PC) indica donde leer."
+    Escribir ""
+    Escribir "PC = ", PC
+    Escribir ""
+    Escribir "PC ", PC, "  ---------->  MAR"
+    Escribir "                         "
+    Escribir "MAR recibe la direccion ", PC
 
-                Escribir "MAR = ", MAR
-                Escribir "Memoria[", MAR, "] --> MDR"
-                MDR <- memoria[MAR]
+    MAR <- PC
 
-                Escribir "MDR = ", Binario8(MDR), " (", MDR, ")"
-                Escribir "MDR --> IR"
-                IR <- MDR
+    Escribir ""
+    Escribir "MAR ", MAR, " ----------> Memoria[", MAR, "]"
+    Escribir "Memoria[", MAR, "] contiene: ", Binario8(memoria[MAR])
+    Escribir ""
+    Escribir "Memoria[", MAR, "] ----------> MDR"
+    MDR <- memoria[MAR]
 
-                Escribir "IR = ", Binario8(IR)
-                Escribir "PC --> PC + 1"
-                PC <- PC + 1
+    Escribir "MDR = ", Binario8(MDR)
+    Escribir ""
+    Escribir "MDR ----------> IR"
+    IR <- MDR
 
-                // DECODE: separar operación y dirección
-                Escribir ""
-                Escribir "2. DECODIFICACION"
-                codigo <- Trunc(IR / 16)
-                direccion <- IR MOD 16
+    Escribir "IR = ", Binario8(IR)
+    Escribir ""
+    Escribir "PC ", PC, " ----------> PC ", PC + 1
+    PC <- PC + 1
 
-                Escribir "IR = ", Binario8(IR)
-                Escribir "Operacion = ", Binario4(codigo)
-                Escribir "Direccion = ", Binario4(direccion), " --> ", direccion
+    // ---------------------------------------------
+    // 2. DECODIFICACION
+    // ---------------------------------------------
+    Escribir ""
+    Escribir "------------------------------------------------------"
+    Escribir "2. DECODIFICADOR: INTERPRETAR LA INSTRUCCION"
+    Escribir "------------------------------------------------------"
+    Escribir ""
+    Escribir "La instruccion tiene 8 bits:"
+    Escribir ""
+    Escribir "     ", Binario8(IR)
+    Escribir "     ---- ----"
+    Escribir "      OP   DIR"
+    Escribir ""
+    Escribir "OP  = los primeros 4 bits: operacion"
+    Escribir "DIR = los ultimos 4 bits: direccion de memoria"
 
-                Segun codigo Hacer
-                    0:
-                        nombreOperacion <- "SUMAR"
-                    1:
-                        nombreOperacion <- "RESTAR"
-                    6:
-                        nombreOperacion <- "MOVER A MEMORIA"
-                    7:
-                        nombreOperacion <- "FINALIZAR"
-                    8:
-                        nombreOperacion <- "CARGAR DESDE MEMORIA"
-                    De Otro Modo:
-                        nombreOperacion <- "INSTRUCCION NO VALIDA"
-                FinSegun
+    codigo <- Trunc(IR / 16)
+    direccion <- IR MOD 16
 
-                Escribir "Decodificador --> ", nombreOperacion
+    Escribir ""
+    Escribir "OP  = ", Binario4(codigo)
+    Escribir "DIR = ", Binario4(direccion), "  --> direccion decimal ", direccion
 
-                // EXECUTE: ejecutar instrucción
-                Escribir ""
-                Escribir "3. EJECUCION"
-                Escribir "ALU:"
-                Escribir "AC antes = ", AC
+    Segun codigo Hacer
 
-                Segun codigo Hacer
-
-                    8:
-                        // Cargar
-                        Escribir "Memoria[", direccion, "] --> Registro de Entrada"
-                        RE <- memoria[direccion]
-
-                        Escribir "RE = ", Binario8(RE), " (", RE, ")"
-                        Escribir "RE --> AC"
-                        AC <- RE
-
-                    0:
-                        // Suma
-                        Escribir "Memoria[", direccion, "] --> Registro de Entrada"
-                        RE <- memoria[direccion]
-
-                        Escribir "RE = ", Binario8(RE), " (", RE, ")"
-                        Escribir "AC + RE --> AC"
-                        AC <- AC + RE
-
-                    1:
-                        // Resta
-                        Escribir "Memoria[", direccion, "] --> Registro de Entrada"
-                        RE <- memoria[direccion]
-
-                        Escribir "RE = ", Binario8(RE), " (", RE, ")"
-                        Escribir "AC - RE --> AC"
-                        AC <- AC - RE
-
-                    6:
-                        // Mover a memoria
-                        Escribir "AC --> MDR"
-                        MDR <- AC
-
-                        Escribir "MDR --> Memoria[", direccion, "]"
-                        memoria[direccion] <- MDR
-
-                    7:
-                        // Finalizar
-                        Escribir "La unidad de control recibe HALT"
-                        finalizado <- Verdadero
-
-                    De Otro Modo:
-                        Escribir "Operacion no implementada"
-                        finalizado <- Verdadero
-
-                FinSegun
-
-                Escribir "AC despues = ", AC
-                Escribir ""
-
-                Escribir "4. TABLA DE MEMORIA ACTUAL"
-                Para i <- 1 Hasta 8 Hacer
-                    Escribir "Posicion ", i, " --> ", Binario8(memoria[i]), " --> ", memoria[i]
-                FinPara
-
-                paso <- paso + 1
-
-                Si finalizado = Falso Entonces
-                    Escribir ""
-                    Escribir "Presione una tecla para el siguiente paso..."
-                    Esperar Tecla
-                FinSi
-
-            FinMientras
-
+        0:
+            nombreOperacion <- "SUMA"
             Escribir ""
-            Escribir "==============================================="
-            Escribir "PROGRAMA FINALIZADO"
-            Escribir "Resultado guardado en memoria[8]: ", memoria[8]
-            Escribir "Binario: ", Binario8(memoria[8])
-            Escribir "==============================================="
-            Esperar Tecla
+            Escribir "DECODIFICADOR:"
+            Escribir "0000 significa SUMAR."
+            Escribir "La ALU sumara el valor de memoria[", direccion, "] al AC."
+
+        1:
+            nombreOperacion <- "RESTA"
+            Escribir ""
+            Escribir "DECODIFICADOR:"
+            Escribir "0001 significa RESTAR."
+            Escribir "La ALU restara el valor de memoria[", direccion, "] al AC."
+
+        6:
+            nombreOperacion <- "MOVER A MEMORIA"
+            Escribir ""
+            Escribir "DECODIFICADOR:"
+            Escribir "0110 significa GUARDAR."
+            Escribir "El valor del AC se guardara en memoria[", direccion, "]."
+
+        7:
+            nombreOperacion <- "FINALIZAR"
+            Escribir ""
+            Escribir "DECODIFICADOR:"
+            Escribir "0111 significa FINALIZAR."
+            Escribir "La Unidad de Control detendra el programa."
+
+        8:
+            nombreOperacion <- "CARGAR DESDE MEMORIA"
+            Escribir ""
+            Escribir "DECODIFICADOR:"
+            Escribir "1000 significa CARGAR."
+            Escribir "El valor de memoria[", direccion, "] se llevara al AC."
+
+        De Otro Modo:
+            nombreOperacion <- "ERROR"
+            Escribir "Instruccion no reconocida."
+
+    FinSegun
+
+    // ---------------------------------------------
+    // 3. EJECUCION EN LA ALU
+    // ---------------------------------------------
+    Escribir ""
+    Escribir "------------------------------------------------------"
+    Escribir "3. ALU: EJECUCION DE LA OPERACION"
+    Escribir "------------------------------------------------------"
+    Escribir ""
+    Escribir "Acumulador antes de ejecutar:"
+    Escribir "AC = ", Binario8(AC), "  --> decimal ", AC
+    Escribir ""
+
+    Segun codigo Hacer
+
+        8:
+            Escribir "CARGAR:"
+            Escribir "Memoria[", direccion, "] = ", Binario8(memoria[direccion])
+            Escribir ""
+            Escribir "Memoria[", direccion, "] ----------> Registro de Entrada (RE)"
+            RE <- memoria[direccion]
+
+            Escribir "RE = ", Binario8(RE), "  --> decimal ", RE
+            Escribir ""
+            Escribir "RE ----------> AC"
+            AC <- RE
+
+            Escribir "AC ahora contiene: ", AC
+
+        0:
+            Escribir "SUMA:"
+            Escribir "Memoria[", direccion, "] = ", Binario8(memoria[direccion])
+            Escribir ""
+            Escribir "Memoria[", direccion, "] ----------> Registro de Entrada (RE)"
+            RE <- memoria[direccion]
+
+            Escribir "RE = ", RE
+            Escribir ""
+            Escribir "AC + RE ----------> AC"
+            Escribir AC, " + ", RE, " = ", AC + RE
+
+            AC <- AC + RE
+
+            Escribir "Nuevo AC = ", Binario8(AC), "  --> decimal ", AC
+
+        1:
+            Escribir "RESTA:"
+            Escribir "Memoria[", direccion, "] = ", Binario8(memoria[direccion])
+            Escribir ""
+            Escribir "Memoria[", direccion, "] ----------> Registro de Entrada (RE)"
+            RE <- memoria[direccion]
+
+            Escribir "RE = ", RE
+            Escribir ""
+            Escribir "AC - RE ----------> AC"
+            Escribir AC, " - ", RE, " = ", AC - RE
+
+            AC <- AC - RE
+
+            Escribir "Nuevo AC = ", Binario8(AC), "  --> decimal ", AC
+
+        6:
+            Escribir "MOVER A MEMORIA:"
+            Escribir ""
+            Escribir "AC = ", AC
+            Escribir ""
+            Escribir "AC ----------> MDR"
+            MDR <- AC
+
+            Escribir "MDR = ", Binario8(MDR)
+            Escribir ""
+            Escribir "MDR ----------> Memoria[", direccion, "]"
+            memoria[direccion] <- MDR
+
+            Escribir "Resultado guardado en memoria[", direccion, "]"
+
+        7:
+            Escribir "FINALIZAR:"
+            Escribir ""
+            Escribir "Unidad de Control ----------> FIN DEL PROGRAMA"
+            finalizado <- Verdadero
+
+        De Otro Modo:
+            Escribir "No se puede ejecutar esta instruccion."
+            finalizado <- Verdadero
+
+    FinSegun
+
+    // ---------------------------------------------
+    // 4. ESTADO ACTUAL
+    // ---------------------------------------------
+    Escribir ""
+    Escribir "------------------------------------------------------"
+    Escribir "4. ESTADO ACTUAL DEL SISTEMA"
+    Escribir "------------------------------------------------------"
+    Escribir ""
+    Escribir "UNIDAD DE CONTROL"
+    Escribir "PC: ", PC
+    Escribir "IR: ", Binario8(IR), "  --> ", nombreOperacion
+    Escribir ""
+    Escribir "MEMORIA"
+    Escribir "MAR: ", MAR
+    Escribir "MDR: ", Binario8(MDR)
+    Escribir ""
+    Escribir "ALU"
+    Escribir "AC: ", Binario8(AC), "  --> decimal ", AC
+    Escribir "RE: ", Binario8(RE), "  --> decimal ", RE
+    Escribir ""
+
+    Escribir "TABLA DE MEMORIA"
+    Escribir "Posicion     Binario       Decimal"
+    Para i <- 1 Hasta 8 Hacer
+        Escribir "   ", i, "        ", Binario8(memoria[i]), "        ", memoria[i]
+    FinPara
+
+    paso <- paso + 1
+
+    Si finalizado = Falso Entonces
+        Escribir ""
+        Escribir "Presione una tecla para ejecutar la siguiente instruccion..."
+        Esperar Tecla
+    FinSi
+
+FinMientras
+
+Escribir ""
+Escribir "======================================================"
+Escribir "               RESULTADO FINAL"
+Escribir "======================================================"
+Escribir ""
+Escribir "El programa llego a la instruccion 0111: FINALIZAR."
+Escribir ""
+Escribir "El resultado fue guardado en memoria[8]."
+Escribir ""
+Escribir "memoria[8] = ", Binario8(memoria[8])
+Escribir "memoria[8] = ", memoria[8], " en decimal"
+Escribir ""
+Escribir "El AC termino con el valor: ", AC
+Escribir "======================================================"
+Esperar Tecla
 
         FinSi
 
