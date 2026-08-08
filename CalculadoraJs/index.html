@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Arquitectura Von Neumann</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="app-header">
+    <h1>Simulador de Arquitectura Von Neumann</h1>
+    <p>Visualización interactiva del ciclo de instrucción y buses de datos</p>
+  </header>
+
+    <!-- Panel de Control y Configuración -->
+    <div class="control-card">
+    <div class="input-group">
+        <label for="formatSelect">Formato Entrada</label>
+        <select id="formatSelect">
+        <option value="DEC">Decimal</option>
+        <option value="BIN">Binario (8 bits)</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <label for="opSelect">Operación</label>
+        <select id="opSelect">
+        <option value="ADD">SUMAR (+)</option>
+        <option value="SUB">RESTAR (-)</option>
+        <option value="MUL">MULTIPLICAR (×)</option>
+        <option value="DIV">DIVIDIR (÷)</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <label for="valA" id="lblA">Valor A (Decimal)</label>
+        <input type="text" id="valA" value="5">
+    </div>
+
+    <div class="input-group">
+        <label for="valB" id="lblB">Valor B (Decimal)</label>
+        <input type="text" id="valB" value="11">
+    </div>
+
+    <button id="btnLoadInstruction" class="btn btn-primary">Cargar y Calcular</button>
+
+    <div class="divider"></div>
+
+    <div class="button-group">
+        <button id="btnNext" class="btn btn-secondary" disabled>Siguiente Paso</button>
+        <button id="btnAuto" class="btn btn-secondary" disabled>Reproducir Auto</button>
+        <button id="btnReset" class="btn btn-outline">Reiniciar</button>
+    </div>
+    </div>
+
+  <!-- Panel Explicativo -->
+  <div class="description-card" id="descPanel">
+    <span class="status-badge">Estado</span>
+    <p>Ingresa los valores numéricos y presiona <b>"Cargar y Calcular"</b> para inicializar el ciclo de instrucción en la memoria.</p>
+  </div>
+
+  <!-- Contenedor del Diagrama -->
+  <div class="diagram-container">
+    <svg class="connections">
+        <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8" />
+        </marker>
+        <marker id="arrow-active" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#ea580c" />
+        </marker>
+        </defs>
+
+      <!-- Bus 1: PC -> R. Direcciones -->
+      <path id="path-pc-rdir" d="M 355 150 L 355 310 L 275 310 L 275 390" marker-end="url(#arrow)"/>
+      
+      <!-- Bus 2: R. Direcciones -> Memoria RAM -->
+      <path id="path-rdir-mem" d="M 275 450 L 275 525 L 390 525" marker-end="url(#arrow)"/>
+
+      <!-- Bus 3: Memoria RAM -> R. Datos -->
+      <path id="path-mem-rdatos" d="M 610 525 L 725 525 L 725 450" marker-end="url(#arrow)"/>
+
+      <!-- Bus 4: R. Datos -> R. Instrucciones -->
+      <path id="path-rdatos-rinst" d="M 725 390 L 725 310 L 480 310 L 480 220 L 440 220" marker-end="url(#arrow)"/>
+
+      <!-- Bus 5: R. Instrucciones -> Decodificador -->
+      <path id="path-rinst-deco" d="M 270 220 L 190 220" marker-end="url(#arrow)"/>
+
+      <!-- Bus 6: R. Instrucciones -> R. Direcciones -->
+      <path id="path-rinst-rdir" d="M 355 250 L 355 290 L 240 290 L 240 390" marker-end="url(#arrow)"/>
+
+      <!-- Bus 7: R. Datos -> R. Entrada ALU -->
+      <path id="path-rdatos-rentrada" d="M 810 420 L 830 420 L 830 280 L 645 280 L 645 250" marker-end="url(#arrow)"/>
+
+      <!-- Bus 8: Salida ALU -> Acumulador -->
+      <path id="path-alu-acum" d="M 750 160 L 750 175 L 855 175 L 855 190" marker-end="url(#arrow)"/>
+    </svg>
+
+    <!-- Unidad de Control -->
+    <section class="block uc-block">
+      <div class="block-title">Unidad de Control (UC)</div>
+      <div id="decodificador" class="component decodificador-box">Decodificador</div>
+
+      <div class="register-wrapper pos-pc">
+        <div class="register-label">Cont. Programa (PC)</div>
+        <div class="register component" id="reg-pc"><span class="val" id="val-pc">0000</span></div>
+      </div>
+
+      <div class="register-wrapper pos-ri">
+        <div class="register-label">R. Instrucciones (RI)</div>
+        <div class="register component" id="reg-ri"><span class="val" id="val-ri">00000000</span></div>
+      </div>
+    </section>
+
+    <!-- ALU -->
+    <section class="block alu-block">
+      <div class="block-title">Unidad Aritmético-Lógica (ALU)</div>
+      
+      <div class="alu-shape-wrapper">
+        <div class="alu-shape">
+          <span>ALU</span>
+        </div>
+      </div>
+
+      <div class="register-wrapper pos-rentrada">
+        <div class="register-label">R. Entrada</div>
+        <div class="register component" id="reg-rentrada"><span class="val" id="val-rentrada">00000000</span></div>
+      </div>
+
+      <div class="register-wrapper pos-acum">
+        <div class="register-label">Acumulador</div>
+        <div class="register component" id="reg-acum"><span class="val" id="val-acum">00000000</span></div>
+      </div>
+    </section>
+
+    <!-- Memoria Principal -->
+    <section class="block mem-block">
+      <div class="block-title">Memoria Principal (RAM)</div>
+
+      <div class="register-wrapper pos-rdir">
+        <div class="register-label">R. Direcciones (MAR)</div>
+        <div class="register component" id="reg-rdir"><span class="val" id="val-rdir">0000</span></div>
+      </div>
+
+      <div class="register-wrapper pos-rdatos">
+        <div class="register-label">R. Datos (MBR)</div>
+        <div class="register component" id="reg-rdatos"><span class="val" id="val-rdatos">00000000</span></div>
+      </div>
+
+      <div class="mem-table-card">
+        <div class="mem-table-header">Tabla de Memoria</div>
+        <div class="mem-table-scroll">
+          <table>
+            <thead>
+              <tr><th>Dir.</th><th>Contenido</th></tr>
+            </thead>
+            <tbody id="memTableBody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
