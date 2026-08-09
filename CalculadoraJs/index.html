@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Simulador educativo de una CPU Von Neumann de 8 bits con ejecución paso a paso.">
   <title>Simulador de Arquitectura Von Neumann</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -13,11 +14,12 @@
     <p>Visualización interactiva del ciclo de instrucción y buses de datos</p>
   </header>
 
+  <main class="app-main">
     <!-- Panel de Control y Configuración -->
-    <div class="control-card">
+    <form class="control-card" id="simulationForm" novalidate>
     <div class="input-group">
-        <label for="formatSelect">Formato Entrada</label>
-        <select id="formatSelect">
+        <label for="formatSelect">Formato de entrada</label>
+        <select id="formatSelect" name="format">
         <option value="DEC">Decimal</option>
         <option value="BIN">Binario (8 bits)</option>
         </select>
@@ -25,7 +27,7 @@
 
     <div class="input-group">
         <label for="opSelect">Operación</label>
-        <select id="opSelect">
+        <select id="opSelect" name="operation">
         <option value="ADD">SUMAR (+)</option>
         <option value="SUB">RESTAR (-)</option>
         <option value="MUL">MULTIPLICAR (×)</option>
@@ -35,34 +37,42 @@
 
     <div class="input-group">
         <label for="valA" id="lblA">Valor A (Decimal)</label>
-        <input type="text" id="valA" value="5">
+        <input type="text" id="valA" name="valueA" value="5" inputmode="numeric" maxlength="3" autocomplete="off" aria-describedby="inputHelp inputError">
     </div>
 
     <div class="input-group">
         <label for="valB" id="lblB">Valor B (Decimal)</label>
-        <input type="text" id="valB" value="11">
+        <input type="text" id="valB" name="valueB" value="11" inputmode="numeric" maxlength="3" autocomplete="off" aria-describedby="inputHelp inputError">
     </div>
 
-    <button id="btnLoadInstruction" class="btn btn-primary">Cargar y Calcular</button>
+    <button id="btnLoadInstruction" class="btn btn-primary" type="submit">Cargar y calcular</button>
 
     <div class="divider"></div>
 
     <div class="button-group">
-        <button id="btnNext" class="btn btn-secondary" disabled>Siguiente Paso</button>
-        <button id="btnAuto" class="btn btn-secondary" disabled>Reproducir Auto</button>
-        <button id="btnReset" class="btn btn-outline">Reiniciar</button>
+        <button id="btnNext" class="btn btn-secondary" type="button" disabled>Siguiente paso</button>
+        <button id="btnAuto" class="btn btn-secondary" type="button" aria-pressed="false" disabled>Reproducción automática</button>
+        <button id="btnReset" class="btn btn-outline" type="button" disabled>Volver al inicio</button>
     </div>
-    </div>
+    <p class="input-help" id="inputHelp">Valores enteros de 8 bits: 0–255 o hasta 8 dígitos binarios.</p>
+    <p class="input-error" id="inputError" role="alert" aria-live="assertive"></p>
+    </form>
 
   <!-- Panel Explicativo -->
-  <div class="description-card" id="descPanel">
-    <span class="status-badge">Estado</span>
-    <p>Ingresa los valores numéricos y presiona <b>"Cargar y Calcular"</b> para inicializar el ciclo de instrucción en la memoria.</p>
-  </div>
+    <section class="description-card" aria-labelledby="simulationStatus">
+      <div class="status-row">
+        <span class="status-badge" id="simulationStatus">Estado</span>
+        <span class="step-progress" id="stepProgress">Sin iniciar</span>
+      </div>
+      <div id="descPanel" aria-live="polite" aria-atomic="true">
+        <p>Ingresa los valores numéricos y presiona <strong>“Cargar y calcular”</strong> para inicializar el ciclo de instrucción en la memoria.</p>
+      </div>
+    </section>
 
   <!-- Contenedor del Diagrama -->
+  <div class="diagram-scroll" role="region" aria-label="Diagrama interactivo de la arquitectura Von Neumann" tabindex="0">
   <div class="diagram-container">
-    <svg class="connections">
+    <svg class="connections" aria-hidden="true">
         <defs>
         <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
             <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8" />
@@ -162,6 +172,8 @@
       </div>
     </section>
   </div>
+  </div>
+  </main>
 
   <script src="script.js"></script>
 </body>

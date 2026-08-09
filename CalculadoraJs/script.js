@@ -1,4 +1,41 @@
-const toBin = (num, bits) => (num >>> 0).toString(2).padStart(bits, '0').slice(-bits);
+const BYTE_MODULO = 256;
+
+const normalizeByte = num => ((num % BYTE_MODULO) + BYTE_MODULO) % BYTE_MODULO;
+const toBin = (num, bits = 8) => normalizeByte(num).toString(2).padStart(bits, '0').slice(-bits);
+
+const parseInput = (inputStr, format) => {
+  const cleanStr = inputStr.trim();
+  const pattern = format === 'BIN' ? /^[01]{1,8}$/ : /^(?:0|[1-9]\d{0,2})$/;
+
+  if (!pattern.test(cleanStr)) {
+    const requirement = format === 'BIN'
+      ? 'debe contener entre 1 y 8 bits (solo 0 y 1)'
+      : 'debe ser un número entero entre 0 y 255';
+    throw new Error(`El valor “${inputStr}” ${requirement}.`);
+  }
+
+  const parsed = parseInt(cleanStr, format === 'BIN' ? 2 : 10);
+  if (parsed > 255) {
+    throw new Error(`El valor “${inputStr}” debe estar entre 0 y 255.`);
+  }
+  return parsed;
+};
+
+const calculateResult = (operation, valueA, valueB) => {
+  if (operation === 'DIV' && valueB === 0) {
+    throw new Error('La división por cero no está permitida.');
+  }
+
+  const operations = {
+    ADD: () => valueA + valueB,
+    SUB: () => valueA - valueB,
+    MUL: () => valueA * valueB,
+    DIV: () => Math.floor(valueA / valueB)
+  };
+  const raw = operations[operation]();
+  const byte = normalizeByte(raw);
+  return { raw, byte, overflow: raw !== byte };
+};
 
 class VonNeumannSimulator {
   constructor() {
@@ -9,16 +46,18 @@ class VonNeumannSimulator {
 
     this.dom = {
       formatSelect: document.getElementById('formatSelect'),
+      form: document.getElementById('simulationForm'),
       opSelect: document.getElementById('opSelect'),
       valA: document.getElementById('valA'),
       valB: document.getElementById('valB'),
       lblA: document.getElementById('lblA'),
       lblB: document.getElementById('lblB'),
-      btnLoad: document.getElementById('btnLoadInstruction'),
       btnNext: document.getElementById('btnNext'),
       btnAuto: document.getElementById('btnAuto'),
       btnReset: document.getElementById('btnReset'),
       descPanel: document.getElementById('descPanel'),
+      stepProgress: document.getElementById('stepProgress'),
+      inputError: document.getElementById('inputError'),
       memTableBody: document.getElementById('memTableBody'),
       valPc: document.getElementById('val-pc'),
       valRi: document.getElementById('val-ri'),
@@ -35,7 +74,10 @@ class VonNeumannSimulator {
 
   bindEvents() {
     this.dom.formatSelect.addEventListener('change', () => this.handleFormatChange());
-    this.dom.btnLoad.addEventListener('click', () => this.setupSimulation());
+    this.dom.form.addEventListener('submit', event => {
+      event.preventDefault();
+      this.setupSimulation();
+    });
     this.dom.btnNext.addEventListener('click', () => this.nextStep());
     this.dom.btnAuto.addEventListener('click', () => this.toggleAuto());
     this.dom.btnReset.addEventListener('click', () => this.reset());
@@ -43,16 +85,21 @@ class VonNeumannSimulator {
 
   handleFormatChange() {
     const isBin = this.dom.formatSelect.value === 'BIN';
+    const previousFormat = isBin ? 'DEC' : 'BIN';
     this.dom.lblA.innerText = isBin ? 'Valor A (Binario)' : 'Valor A (Decimal)';
     this.dom.lblB.innerText = isBin ? 'Valor B (Binario)' : 'Valor B (Decimal)';
-    
-    if (isBin) {
-      this.dom.valA.value = '00000101'; // 5 en binario
-      this.dom.valB.value = '00001011'; // 11 en binario
-    } else {
-      this.dom.valA.value = '5';
-      this.dom.valB.value = '11';
-    }
+    this.dom.valA.maxLength = isBin ? 8 : 3;
+    this.dom.valB.maxLength = isBin ? 8 : 3;
+
+    [this.dom.valA, this.dom.valB].forEach(input => {
+      try {
+        const value = parseInput(input.value, previousFormat);
+        input.value = isBin ? toBin(value) : String(value);
+      } catch {
+        input.value = isBin ? '00000000' : '0';
+      }
+    });
+    this.clearInputError();
   }
 
   resetMemory() {
@@ -79,23 +126,17 @@ class VonNeumannSimulator {
     });
   }
 
-  parseInput(inputStr, format) {
-    const cleanStr = inputStr.trim();
-    if (format === 'BIN') {
-      if (!/^[01]+$/.test(cleanStr)) {
-        throw new Error(`El valor "${inputStr}" contiene caracteres no válidos para formato binario (solo 0 y 1).`);
-      }
-      if (cleanStr.length > 8) {
-        throw new Error(`El valor binario "${inputStr}" excede los 8 bits permitidos.`);
-      }
-      return parseInt(cleanStr, 2);
-    } else {
-      const parsed = parseInt(cleanStr, 10);
-      if (isNaN(parsed) || parsed < 0 || parsed > 255) {
-        throw new Error(`El valor decimal "${inputStr}" debe ser un número entero entre 0 y 255.`);
-      }
-      return parsed;
-    }
+  clearInputError() {
+    this.dom.inputError.textContent = '';
+    this.dom.valA.removeAttribute('aria-invalid');
+    this.dom.valB.removeAttribute('aria-invalid');
+  }
+
+  showInputError(message) {
+    this.dom.inputError.textContent = message;
+    this.dom.valA.setAttribute('aria-invalid', 'true');
+    this.dom.valB.setAttribute('aria-invalid', 'true');
+    this.dom.valA.focus();
   }
 
   setupSimulation() {
@@ -104,29 +145,26 @@ class VonNeumannSimulator {
 
     let numA, numB;
     try {
-      numA = this.parseInput(this.dom.valA.value, format);
-      numB = this.parseInput(this.dom.valB.value, format);
+      numA = parseInput(this.dom.valA.value, format);
+      numB = parseInput(this.dom.valB.value, format);
+      calculateResult(op, numA, numB);
     } catch (err) {
-      alert(`Error de Entrada: ${err.message}`);
+      this.showInputError(err.message);
       return;
     }
-
-    if (op === 'DIV' && numB === 0) {
-      alert('Error: División por cero no permitida.');
-      return;
-    }
+    this.clearInputError();
 
     const binA = toBin(numA, 8);
     const binB = toBin(numB, 8);
 
     // Códigos de operación
-    // 0001 = LOAD
-    // 0000 = ADD | 0010 = SUB | 0011 = MUL | 0100 = DIV
-    const opCodeLoad = '0001';
+    // ISA: 1000 = LOAD; 0000 = ADD; 0001 = SUB.
+    // 0010 = MUL y 0011 = DIV son extensiones de esta calculadora.
+    const opCodeLoad = '1000';
     let opCodeMath = '0000';
-    if (op === 'SUB') opCodeMath = '0010';
-    if (op === 'MUL') opCodeMath = '0011';
-    if (op === 'DIV') opCodeMath = '0100';
+    if (op === 'SUB') opCodeMath = '0001';
+    if (op === 'MUL') opCodeMath = '0010';
+    if (op === 'DIV') opCodeMath = '0011';
 
     const addrValA = '0100';
     const addrValB = '0101';
@@ -138,18 +176,16 @@ class VonNeumannSimulator {
 
     this.renderMemoryTable();
 
-    this.stepsSequence = this.generateDetailedSteps(op, numA, numB, binA, binB, opCodeMath, addrValA, addrValB);
+    this.stepsSequence = this.generateDetailedSteps(op, numA, numB, binA, binB, opCodeLoad, opCodeMath, addrValA, addrValB);
 
     this.reset();
-    this.dom.btnNext.disabled = false;
-    this.dom.btnAuto.disabled = false;
 
     const opSymbols = { ADD: '+', SUB: '-', MUL: '×', DIV: '÷' };
     this.dom.descPanel.innerHTML = `<span class="status-badge">Estado</span><p><b>Simulación lista:</b> ${numA} ${opSymbols[op]} ${numB}.<br>` +
       `Memoria configurada. Todos los registros inician en cero. Presiona "Siguiente Paso" para comenzar el ciclo de búsqueda (Fetch).</p>`;
   }
 
-  generateDetailedSteps(op, numA, numB, binA, binB, opCodeMath, addrValA, addrValB) {
+  generateDetailedSteps(op, numA, numB, binA, binB, opCodeLoad, opCodeMath, addrValA, addrValB) {
     let resultNum = 0;
     let opSymbol = '';
 
@@ -172,8 +208,13 @@ class VonNeumannSimulator {
         break;
     }
 
-    const resultBin = toBin(resultNum, 8);
-    const inst1Bin = '0001' + addrValA;
+    const result = calculateResult(op, numA, numB);
+    resultNum = result.raw;
+    const resultBin = toBin(result.byte, 8);
+    const overflowNote = result.overflow
+      ? `<br><strong>Desbordamiento de 8 bits:</strong> ${resultNum} se almacena como ${result.byte} (módulo 256).`
+      : '';
+    const inst1Bin = opCodeLoad + addrValA;
     const inst2Bin = opCodeMath + addrValB;
 
     return [
@@ -213,7 +254,7 @@ class VonNeumannSimulator {
       },
       {
         desc: "<span class='status-badge'>Instrucción 1/2: LOAD</span><p><b>Paso 5: Decodificación</b><br>" +
-              "El Decodificador evalúa los bits de código de operación (<code>0001</code>) e identifica: <b>CARGAR (LOAD)</b>.<br>" +
+              `El Decodificador evalúa los bits de código de operación (<code>${opCodeLoad}</code>) e identifica: <b>CARGAR (LOAD)</b>.<br>` +
               "<i>Determina que debe leer un dato de la RAM y llevarlo al Acumulador.</i></p>",
         activeRegs: ['reg-ri', 'decodificador'],
         activePaths: ['path-rinst-deco'],
@@ -238,11 +279,11 @@ class VonNeumannSimulator {
       },
       {
         desc: "<span class='status-badge'>Instrucción 1/2: LOAD</span><p><b>Paso 8: Carga Inicial al Acumulador</b><br>" +
-              `El Valor A (<code>${binA}</code>) presente en el MBR se guarda en el Acumulador.<br>` +
+              `El Valor A (<code>${binA}</code>) pasa por el registro de entrada y la ALU hasta el Acumulador.<br>` +
               "<i>El Acumulador abandona el cero y queda cargado con el primer operando.</i></p>",
-        activeRegs: ['reg-rdatos', 'reg-acum'],
+        activeRegs: ['reg-rdatos', 'reg-rentrada', 'reg-acum'],
         activePaths: ['path-rdatos-rentrada', 'path-alu-acum'],
-        vals: { acum: binA }
+        vals: { rentrada: binA, acum: binA }
       },
 
       // --- INSTRUCCIÓN 2: OPERACIÓN ---
@@ -255,7 +296,15 @@ class VonNeumannSimulator {
         vals: { rdir: '0001' }
       },
       {
-        desc: "<span class='status-badge'>Instrucción 2/2: OPERACIÓN</span><p><b>Paso 10: Lectura de Instrucción 2 al MBR</b><br>" +
+        desc: "<span class='status-badge'>Instrucción 2/2: OPERACIÓN</span><p><b>Paso 10: Incremento del PC</b><br>" +
+              "El Contador de Programa (PC) se incrementa a <code>0010</code> después de direccionar la segunda instrucción.<br>" +
+              "<i>El PC queda listo para buscar la siguiente instrucción del programa.</i></p>",
+        activeRegs: ['reg-pc'],
+        activePaths: [],
+        vals: { pc: '0010' }
+      },
+      {
+        desc: "<span class='status-badge'>Instrucción 2/2: OPERACIÓN</span><p><b>Paso 11: Lectura de Instrucción 2 al MBR</b><br>" +
               `La celda <code>0001</code> entrega la instrucción de operación (<code>${inst2Bin}</code>) al MBR.<br>` +
               "<i>Extrae la instrucción desde la RAM.</i></p>",
         activeRegs: ['reg-rdatos'],
@@ -264,7 +313,7 @@ class VonNeumannSimulator {
         vals: { rdatos: inst2Bin }
       },
       {
-        desc: "<span class='status-badge'>Instrucción 2/2: OPERACIÓN</span><p><b>Paso 11: Transferencia de Instrucción 2 al RI</b><br>" +
+        desc: "<span class='status-badge'>Instrucción 2/2: OPERACIÓN</span><p><b>Paso 12: Transferencia de Instrucción 2 al RI</b><br>" +
               `La instrucción en el MBR (<code>${inst2Bin}</code>) pasa al Registro de Instrucciones (RI).<br>` +
               "<i>Almacena la nueva orden en la Unidad de Control.</i></p>",
         activeRegs: ['reg-rdatos', 'reg-ri'],
@@ -272,7 +321,7 @@ class VonNeumannSimulator {
         vals: { ri: inst2Bin }
       },
       {
-        desc: "<span class='status-badge'>Instrucción 2/2: OPERACIÓN</span><p><b>Paso 12: Decodificación de Operación</b><br>" +
+        desc: "<span class='status-badge'>Instrucción 2/2: OPERACIÓN</span><p><b>Paso 13: Decodificación de Operación</b><br>" +
               `El Decodificador interpreta el código <code>${opCodeMath}</code> y establece: <b>${opSymbol}</b>.<br>` +
               "<i>Configura la ALU para la operación solicitada.</i></p>",
         activeRegs: ['reg-ri', 'decodificador'],
@@ -280,7 +329,7 @@ class VonNeumannSimulator {
         vals: { deco: opSymbol }
       },
       {
-        desc: "<span class='status-badge'>Instrucción 2/2: OPERACIÓN</span><p><b>Paso 13: Dirección del Valor B al MAR</b><br>" +
+        desc: "<span class='status-badge'>Instrucción 2/2: OPERACIÓN</span><p><b>Paso 14: Dirección del Valor B al MAR</b><br>" +
               `La dirección del operando B (<code>${addrValB}</code>) se transfiere desde el RI hacia el MAR.<br>` +
               "<i>Apunta a la ubicación del segundo dato numérico.</i></p>",
         activeRegs: ['reg-ri', 'reg-rdir'],
@@ -288,7 +337,7 @@ class VonNeumannSimulator {
         vals: { rdir: addrValB }
       },
       {
-        desc: "<span class='status-badge'>Instrucción 2/2: OPERACIÓN</span><p><b>Paso 14: Lectura del Valor B al MBR</b><br>" +
+        desc: "<span class='status-badge'>Instrucción 2/2: OPERACIÓN</span><p><b>Paso 15: Lectura del Valor B al MBR</b><br>" +
               `La celda <code>${addrValB}</code> lee el Valor B (<code>${binB}</code>) y lo coloca en el MBR.<br>` +
               "<i>Trae el segundo operando desde la memoria RAM.</i></p>",
         activeRegs: ['reg-rdatos'],
@@ -297,7 +346,7 @@ class VonNeumannSimulator {
         vals: { rdatos: binB }
       },
       {
-        desc: "<span class='status-badge'>Instrucción 2/2: OPERACIÓN</span><p><b>Paso 15: Transferencia a R. Entrada de la ALU</b><br>" +
+        desc: "<span class='status-badge'>Instrucción 2/2: OPERACIÓN</span><p><b>Paso 16: Transferencia a R. Entrada de la ALU</b><br>" +
               `El Valor B (<code>${binB}</code>) pasa del MBR al Registro de Entrada de la ALU.<br>` +
               "<i>Posiciona el dato en el terminal de entrada del circuito de cálculo.</i></p>",
         activeRegs: ['reg-rdatos', 'reg-rentrada'],
@@ -305,7 +354,7 @@ class VonNeumannSimulator {
         vals: { rentrada: binB }
       },
       {
-        desc: "<span class='status-badge'>Instrucción 2/2: OPERACIÓN</span><p><b>Paso 16: Ejecución del Cálculo en la ALU</b><br>" +
+        desc: "<span class='status-badge'>Instrucción 2/2: OPERACIÓN</span><p><b>Paso 17: Ejecución del Cálculo en la ALU</b><br>" +
               `La ALU procesa la operación (${opSymbol}) entre el Acumulador (<code>${binA}</code>) y el R. Entrada (<code>${binB}</code>).<br>` +
               `<i>Realiza la operación aritmética a nivel circuital.</i></p>`,
         activeRegs: ['reg-acum', 'reg-rentrada'],
@@ -313,7 +362,7 @@ class VonNeumannSimulator {
         vals: {}
       },
       {
-        desc: "<span class='status-badge'>Instrucción 2/2: OPERACIÓN</span><p><b>Paso 17: Escritura del Resultado al Acumulador</b><br>" +
+        desc: "<span class='status-badge'>Instrucción 2/2: OPERACIÓN</span><p><b>Paso 18: Escritura del Resultado al Acumulador</b><br>" +
               `El resultado del cálculo (<code>${resultBin}</code>) se transfiere al Acumulador.<br>` +
               "<i>El valor en el Acumulador se reemplaza por el resultado final.</i></p>",
         activeRegs: ['reg-acum'],
@@ -321,8 +370,8 @@ class VonNeumannSimulator {
         vals: { acum: resultBin }
       },
       {
-        desc: "<span class='status-badge'>Finalizado</span><p><b>Paso 18: Ciclo Completado</b><br>" +
-              `Resultado final: <code>${resultBin}</code> (Decimal ${resultNum}).<br>` +
+        desc: "<span class='status-badge'>Finalizado</span><p><b>Paso 19: Ciclo completado</b><br>" +
+              `Resultado final en el acumulador: <code>${resultBin}</code> (Decimal ${result.byte}).${overflowNote}<br>` +
               "<i>El programa ha finalizado exitosamente todas sus instrucciones.</i></p>",
         activeRegs: ['reg-acum'],
         activePaths: [],
@@ -334,7 +383,10 @@ class VonNeumannSimulator {
   updateView() {
     this.clearHighlights();
 
-    if (this.currentStep === 0) return;
+    if (this.currentStep === 0) {
+      this.updateControls();
+      return;
+    }
 
     const state = this.stepsSequence[this.currentStep - 1];
 
@@ -365,12 +417,21 @@ class VonNeumannSimulator {
         path.setAttribute('marker-end', 'url(#arrow-active)');
       }
     });
+    this.updateControls();
+  }
+
+  updateControls() {
+    const total = this.stepsSequence.length;
+    this.dom.stepProgress.textContent = total ? `Paso ${this.currentStep} de ${total}` : 'Sin iniciar';
+    this.dom.btnNext.disabled = !total || this.currentStep >= total || Boolean(this.autoInterval);
+    this.dom.btnAuto.disabled = !total;
+    this.dom.btnReset.disabled = !total || this.currentStep === 0;
   }
 
   clearHighlights() {
     document.querySelectorAll('.component').forEach(el => el.classList.remove('active'));
-    document.querySelectorAll('tr').forEach(el => el.classList.remove('active-row'));
-    document.querySelectorAll('path').forEach(path => {
+    this.dom.memTableBody.querySelectorAll('tr').forEach(el => el.classList.remove('active-row'));
+    document.querySelectorAll('svg.connections > path').forEach(path => {
       path.classList.remove('active-path');
       path.setAttribute('marker-end', 'url(#arrow)');
     });
@@ -396,19 +457,25 @@ class VonNeumannSimulator {
     this.dom.valAcum.innerText = '00000000';
     this.dom.decodificador.innerText = 'Decodificador';
 
-    this.dom.descPanel.innerHTML = '<span class="status-badge">Estado</span>' +
-      '<p>Ingresa los valores numéricos y presiona <b>"Cargar y Calcular"</b> para inicializar el ciclo de instrucción en la memoria.</p>';
+    this.dom.descPanel.innerHTML = this.stepsSequence.length
+      ? '<p>La simulación volvió al estado inicial. Presiona <strong>“Siguiente paso”</strong> o inicia la reproducción automática.</p>'
+      : '<p>Ingresa los valores numéricos y presiona <strong>“Cargar y calcular”</strong> para inicializar el ciclo de instrucción en la memoria.</p>';
 
     this.clearHighlights();
+    this.updateControls();
   }
 
   toggleAuto() {
     if (this.autoInterval) {
       clearInterval(this.autoInterval);
       this.autoInterval = null;
-      this.dom.btnAuto.innerText = 'Reproducir Auto';
+      this.dom.btnAuto.innerText = 'Reproducción automática';
+      this.dom.btnAuto.setAttribute('aria-pressed', 'false');
+      this.updateControls();
     } else {
+      if (this.currentStep >= this.stepsSequence.length) this.reset();
       this.dom.btnAuto.innerText = 'Pausar';
+      this.dom.btnAuto.setAttribute('aria-pressed', 'true');
       this.autoInterval = setInterval(() => {
         if (this.currentStep < this.stepsSequence.length) {
           this.nextStep();
@@ -416,10 +483,17 @@ class VonNeumannSimulator {
           this.toggleAuto();
         }
       }, 2500);
+      this.updateControls();
     }
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  window.simulator = new VonNeumannSimulator();
-});
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', () => {
+    window.simulator = new VonNeumannSimulator();
+  });
+}
+
+if (typeof module !== 'undefined') {
+  module.exports = { calculateResult, normalizeByte, parseInput, toBin };
+}

@@ -12,7 +12,7 @@
   --alu-border: #bbf7d0;
   --alu-title: #166534;
   
-  --mem-bg: #fffbebf;
+  --mem-bg: #fffbeb;
   --mem-border: #fde68a;
   --mem-title: #92400e;
 
@@ -32,10 +32,15 @@
 body {
   background-color: var(--bg-color);
   color: var(--text-main);
-  padding: 30px;
+  min-width: 320px;
+  padding: 30px clamp(16px, 4vw, 40px);
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.app-main {
+  width: min(100%, 1000px);
 }
 
 .app-header {
@@ -64,9 +69,19 @@ body {
   display: flex;
   align-items: center;
   gap: 16px;
+  flex-wrap: wrap;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
   margin-bottom: 16px;
 }
+
+.input-help,
+.input-error {
+  flex-basis: 100%;
+  font-size: 12px;
+}
+
+.input-help { color: var(--text-muted); }
+.input-error { min-height: 18px; color: #b91c1c; font-weight: 600; }
 
 .input-group {
   display: flex;
@@ -88,10 +103,16 @@ body {
   font-family: 'Courier New', monospace;
   font-weight: 700;
   outline: none;
+  min-height: 40px;
 }
 
 .input-group input:focus, .input-group select:focus {
   border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+}
+
+.input-group input[aria-invalid="true"] {
+  border-color: #dc2626;
 }
 
 .divider {
@@ -113,6 +134,13 @@ body {
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
+  min-height: 40px;
+}
+
+.btn:focus-visible,
+.diagram-scroll:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.45);
+  outline-offset: 3px;
 }
 
 .btn-primary { background-color: #2563eb; color: white; }
@@ -131,7 +159,7 @@ body {
 
 /* Tarjeta de Descripción */
 .description-card {
-  width: 1000px;
+  width: 100%;
   background: var(--card-bg);
   border: 1px solid #e2e8f0;
   border-left: 4px solid #2563eb;
@@ -141,6 +169,19 @@ body {
   box-shadow: 0 2px 4px rgba(0,0,0,0.02);
   font-size: 14px;
   line-height: 1.6;
+}
+
+.status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.step-progress {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .status-badge {
@@ -156,6 +197,14 @@ body {
 }
 
 /* Canvas del Diagrama */
+.diagram-scroll {
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  border-radius: 16px;
+  overscroll-behavior-inline: contain;
+}
+
 .diagram-container {
   position: relative;
   width: 1000px;
@@ -288,7 +337,7 @@ svg.connections {
 }
 
 /* Color y estilo base de los buses */
-path {
+svg.connections > path {
   stroke: var(--bus-default, #94a3b8);
   stroke-width: 2.5;
   fill: none;
@@ -304,7 +353,7 @@ path {
 }
 
 /* ESTADO ACTIVO: Colorea la línea y la flecha directamente */
-path.active-path {
+svg.connections > path.active-path {
   stroke: #ea580c !important; /* Rojo / Naranja intenso */
   stroke-width: 3.5;
 }
@@ -317,3 +366,41 @@ path.active-path ~ defs .arrow-head {
 
 .marker-path { fill: var(--bus-default); }
 .marker-active-path { fill: var(--bus-active); }
+
+@media (max-width: 860px) {
+  body { align-items: stretch; }
+
+  .app-header { text-align: left; }
+
+  .control-card {
+    align-items: stretch;
+    padding: 16px;
+  }
+
+  .input-group {
+    flex: 1 1 180px;
+  }
+
+  .divider { display: none; }
+
+  .button-group {
+    flex: 1 1 100%;
+    flex-wrap: wrap;
+  }
+
+  .button-group .btn { flex: 1 1 150px; }
+}
+
+@media (max-width: 520px) {
+  body { padding: 20px 12px; }
+  .app-header h1 { font-size: 21px; }
+  .control-card > .btn-primary { width: 100%; }
+  .description-card { padding: 14px 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
