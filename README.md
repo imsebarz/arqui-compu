@@ -52,4 +52,4 @@ node --test CalculadoraJs/script.test.js
 
 ## Despliegue
 
-El workflow [`.github/workflows/pages.yml`](.github/workflows/pages.yml) valida el JavaScript y publica el contenido de `CalculadoraJs` en GitHub Pages después de cada cambio relevante enviado a `main`. El repositorio debe tener **Settings → Pages → Source** configurado como **GitHub Actions**.
+El workflow [`.github/workflows/pages.yml`](.github/workflows/pages.yml) valida el JavaScript, habilita GitHub Pages y publica el contenido de `CalculadoraJs` después de cada cambio relevante enviado a `main`.
