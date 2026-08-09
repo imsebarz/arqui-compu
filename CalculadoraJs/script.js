@@ -414,7 +414,7 @@ class VonNeumannSimulator {
               `La ALU procesa la operación (${opSymbol}) entre el Acumulador (<code>${binA}</code>) y el R. Entrada (<code>${binB}</code>).<br>` +
               `<i>Realiza la operación aritmética a nivel circuital.</i></p>`,
         activeRegs: ['reg-acum', 'reg-rentrada', 'alu-core'],
-        activePaths: [],
+        activePaths: ['path-rentrada-alu'],
         vals: {}
       },
       {
