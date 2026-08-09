@@ -47,6 +47,12 @@ class VonNeumannSimulator {
     this.dom = {
       formatSelect: document.getElementById('formatSelect'),
       form: document.getElementById('simulationForm'),
+      appMain: document.getElementById('appMain'),
+      sidebar: document.getElementById('configSidebar'),
+      sidebarToggle: document.getElementById('sidebarToggle'),
+      sidebarToggleLabel: document.getElementById('sidebarToggleLabel'),
+      diagramScroll: document.querySelector('.diagram-scroll'),
+      diagramContainer: document.getElementById('diagramContainer'),
       opSelect: document.getElementById('opSelect'),
       valA: document.getElementById('valA'),
       valB: document.getElementById('valB'),
@@ -70,6 +76,7 @@ class VonNeumannSimulator {
 
     this.bindEvents();
     this.resetMemory();
+    this.initializeLayout();
   }
 
   bindEvents() {
@@ -81,6 +88,53 @@ class VonNeumannSimulator {
     this.dom.btnNext.addEventListener('click', () => this.nextStep());
     this.dom.btnAuto.addEventListener('click', () => this.toggleAuto());
     this.dom.btnReset.addEventListener('click', () => this.reset());
+    this.dom.sidebarToggle.addEventListener('click', () => {
+      const isCollapsed = this.dom.appMain.classList.contains('sidebar-collapsed');
+      this.setSidebarCollapsed(!isCollapsed);
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && !this.dom.appMain.classList.contains('sidebar-collapsed')) {
+        this.setSidebarCollapsed(true);
+        this.dom.sidebarToggle.focus();
+      }
+    });
+  }
+
+  initializeLayout() {
+    this.setSidebarCollapsed(window.matchMedia('(max-width: 960px)').matches, false);
+
+    const scheduleFit = () => window.requestAnimationFrame(() => this.fitDiagram());
+    if (typeof ResizeObserver !== 'undefined') {
+      this.layoutObserver = new ResizeObserver(scheduleFit);
+      this.layoutObserver.observe(this.dom.diagramScroll);
+    } else {
+      window.addEventListener('resize', scheduleFit);
+    }
+    scheduleFit();
+  }
+
+  setSidebarCollapsed(collapsed, animate = true) {
+    if (!animate) this.dom.appMain.classList.add('layout-initializing');
+    this.dom.appMain.classList.toggle('sidebar-collapsed', collapsed);
+    this.dom.sidebarToggle.setAttribute('aria-expanded', String(!collapsed));
+    this.dom.sidebarToggleLabel.textContent = collapsed ? 'Mostrar configuración' : 'Ocultar configuración';
+    this.dom.sidebar.inert = collapsed;
+    this.dom.sidebar.setAttribute('aria-hidden', String(collapsed));
+
+    window.requestAnimationFrame(() => {
+      this.fitDiagram();
+      this.dom.appMain.classList.remove('layout-initializing');
+    });
+  }
+
+  fitDiagram() {
+    const width = Math.max(0, this.dom.diagramScroll.clientWidth - 8);
+    const height = Math.max(0, this.dom.diagramScroll.clientHeight - 8);
+    if (!width || !height) return;
+
+    const minimumScale = window.innerWidth <= 960 ? 0.58 : 0.7;
+    const scale = Math.max(minimumScale, Math.min(1, width / 1000, height / 680));
+    this.dom.diagramContainer.style.zoom = scale.toFixed(3);
   }
 
   handleFormatChange() {
@@ -183,6 +237,8 @@ class VonNeumannSimulator {
     const opSymbols = { ADD: '+', SUB: '-', MUL: '×', DIV: '÷' };
     this.dom.descPanel.innerHTML = `<span class="status-badge">Estado</span><p><b>Simulación lista:</b> ${numA} ${opSymbols[op]} ${numB}.<br>` +
       `Memoria configurada. Todos los registros inician en cero. Presiona "Siguiente Paso" para comenzar el ciclo de búsqueda (Fetch).</p>`;
+    this.restartAnimation(this.dom.descPanel, 'step-enter');
+    if (window.innerWidth <= 960) this.setSidebarCollapsed(true);
   }
 
   generateDetailedSteps(op, numA, numB, binA, binB, opCodeLoad, opCodeMath, addrValA, addrValB) {
@@ -357,7 +413,7 @@ class VonNeumannSimulator {
         desc: "<span class='status-badge'>Instrucción 2/2: OPERACIÓN</span><p><b>Paso 17: Ejecución del Cálculo en la ALU</b><br>" +
               `La ALU procesa la operación (${opSymbol}) entre el Acumulador (<code>${binA}</code>) y el R. Entrada (<code>${binB}</code>).<br>` +
               `<i>Realiza la operación aritmética a nivel circuital.</i></p>`,
-        activeRegs: ['reg-acum', 'reg-rentrada'],
+        activeRegs: ['reg-acum', 'reg-rentrada', 'alu-core'],
         activePaths: [],
         vals: {}
       },
@@ -391,14 +447,15 @@ class VonNeumannSimulator {
     const state = this.stepsSequence[this.currentStep - 1];
 
     this.dom.descPanel.innerHTML = state.desc;
+    this.restartAnimation(this.dom.descPanel, 'step-enter');
 
-    if (state.vals.pc !== undefined) this.dom.valPc.innerText = state.vals.pc;
-    if (state.vals.ri !== undefined) this.dom.valRi.innerText = state.vals.ri;
-    if (state.vals.rdir !== undefined) this.dom.valRdir.innerText = state.vals.rdir;
-    if (state.vals.rdatos !== undefined) this.dom.valRdatos.innerText = state.vals.rdatos;
-    if (state.vals.rentrada !== undefined) this.dom.valRentrada.innerText = state.vals.rentrada;
-    if (state.vals.acum !== undefined) this.dom.valAcum.innerText = state.vals.acum;
-    if (state.vals.deco !== undefined) this.dom.decodificador.innerText = state.vals.deco;
+    if (state.vals.pc !== undefined) this.updateValue(this.dom.valPc, state.vals.pc);
+    if (state.vals.ri !== undefined) this.updateValue(this.dom.valRi, state.vals.ri);
+    if (state.vals.rdir !== undefined) this.updateValue(this.dom.valRdir, state.vals.rdir);
+    if (state.vals.rdatos !== undefined) this.updateValue(this.dom.valRdatos, state.vals.rdatos);
+    if (state.vals.rentrada !== undefined) this.updateValue(this.dom.valRentrada, state.vals.rentrada);
+    if (state.vals.acum !== undefined) this.updateValue(this.dom.valAcum, state.vals.acum);
+    if (state.vals.deco !== undefined) this.updateValue(this.dom.decodificador, state.vals.deco);
 
     state.activeRegs.forEach(id => {
       const el = document.getElementById(id);
@@ -418,6 +475,18 @@ class VonNeumannSimulator {
       }
     });
     this.updateControls();
+  }
+
+  restartAnimation(element, className) {
+    element.classList.remove(className);
+    void element.offsetWidth;
+    element.classList.add(className);
+  }
+
+  updateValue(element, value) {
+    if (element.innerText === value) return;
+    element.innerText = value;
+    this.restartAnimation(element, 'value-updating');
   }
 
   updateControls() {

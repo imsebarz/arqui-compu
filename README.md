@@ -12,8 +12,10 @@ La versión publicada está disponible en [GitHub Pages](https://imsebarz.github
 - Suma, resta, multiplicación y división entera.
 - Ejecución manual o reproducción automática de 19 pasos.
 - Representación visual de los ciclos de búsqueda, decodificación y ejecución.
+- Panel lateral de configuración colapsable para mantener la CPU visible sin hacer scroll.
+- Animaciones fluidas en buses, registros, memoria y ALU, con soporte para preferencias de movimiento reducido.
 - Aritmética de 8 bits con explicación de desbordamiento módulo 256.
-- Controles accesibles por teclado y layout adaptable con desplazamiento horizontal del diagrama en pantallas pequeñas.
+- Controles accesibles por teclado y panel tipo drawer en pantallas pequeñas.
 
 ## Formato de instrucción
 
