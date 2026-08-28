@@ -1,0 +1,6 @@
+# Ejercicio b — GINEBRA: tabla exhaustiva de 4 combinaciones
+A B GINEBRA
+0 0 1
+0 1 0
+1 0 1
+1 1 1

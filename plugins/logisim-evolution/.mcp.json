@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "logisim_evolution": {
+      "title": "Logisim Evolution Circuit Engineer",
+      "description": "Create, inspect, validate, simulate, and open Logisim Evolution circuit projects.",
+      "cwd": ".",
+      "command": "node",
+      "args": ["./mcp/server.mjs", "--stdio"]
+    }
+  }
+}

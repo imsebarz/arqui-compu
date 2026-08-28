@@ -1,0 +1,10 @@
+# Ejercicio g — BRANDY: tabla exhaustiva de 8 combinaciones
+A B C BRANDY
+0 0 0 1
+0 0 1 1
+0 1 0 1
+0 1 1 1
+1 0 0 1
+1 0 1 0
+1 1 0 1
+1 1 1 1

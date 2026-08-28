@@ -1,0 +1,23 @@
+{
+  "name": "logisim-evolution",
+  "version": "0.1.0",
+  "description": "Design and verify Logisim Evolution circuits through a local, native-backed MCP server.",
+  "author": {
+    "name": "Sebastian Ruiz"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Logisim Evolution Engineer",
+    "shortDescription": "Design and verify digital circuits.",
+    "longDescription": "A local circuit-engineering plugin for Logisim Evolution. It compiles Boolean designs, creates hierarchical projects, inspects existing .circ files, writes test vectors, runs native simulations, and opens validated projects for visual QA.",
+    "developerName": "Sebastian Ruiz",
+    "category": "Developer Tools",
+    "capabilities": ["Read", "Write", "Local", "Interactive"],
+    "defaultPrompt": [
+      "Design and verify a Logisim circuit for me.",
+      "Inspect this .circ file and find wiring errors.",
+      "Build test vectors for my sequential circuit."
+    ]
+  },
+  "mcpServers": "./.mcp.json"
+}

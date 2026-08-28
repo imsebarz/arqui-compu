@@ -1,0 +1,10 @@
+# Álgebra → circuito — MACHADO: tabla exhaustiva de 8 combinaciones
+A B C MACHADO
+0 0 0 1
+0 0 1 1
+0 1 0 1
+0 1 1 1
+1 0 0 1
+1 0 1 1
+1 1 0 1
+1 1 1 0

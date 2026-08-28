@@ -1,0 +1,1734 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project source="4.1.0" version="1.0">
+  <lib desc="#Wiring" name="0"/>
+  <lib desc="#Gates" name="1"/>
+  <lib desc="#Plexers" name="2"/>
+  <lib desc="#Arithmetic" name="3"/>
+  <lib desc="#Memory" name="4"/>
+  <lib desc="#I/O" name="5"/>
+  <lib desc="#TTL" name="6"/>
+  <lib desc="#TCL" name="7"/>
+  <lib desc="#Base" name="8"/>
+  <main name="INDICE_TALLER"/>
+  <options>
+    <a name="gateUndefined" val="ignore"/>
+    <a name="simlimit" val="1000"/>
+    <a name="simrand" val="0"/>
+  </options>
+  <mappings>
+    <tool lib="8" map="Button2" name="Poke Tool"/>
+    <tool lib="8" map="Button3" name="Menu Tool"/>
+    <tool lib="8" map="Ctrl Button1" name="Menu Tool"/>
+  </mappings>
+  <toolbar>
+    <tool lib="8" name="Poke Tool"/>
+    <tool lib="8" name="Edit Tool"/>
+    <tool lib="8" name="Wiring Tool"/>
+    <tool lib="8" name="Text Tool"/>
+    <sep/>
+    <tool lib="0" name="Pin">
+      <a name="tristate" val="false"/>
+    </tool>
+    <tool lib="0" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+    </tool>
+    <sep/>
+    <tool lib="1" name="NOT Gate"/>
+    <tool lib="1" name="AND Gate"/>
+    <tool lib="1" name="OR Gate"/>
+    <tool lib="1" name="XOR Gate"/>
+    <tool lib="1" name="NAND Gate"/>
+    <tool lib="1" name="NOR Gate"/>
+    <tool lib="1" name="XNOR Gate"/>
+    <sep/>
+    <tool lib="4" name="D Flip-Flop"/>
+    <tool lib="4" name="Register"/>
+  </toolbar>
+  <circuit name="INDICE_TALLER">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="INDICE_TALLER"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="8" loc="(80,60)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="TALLER DE CLASE - LOGISIM"/>
+    </comp>
+    <comp lib="8" loc="(80,100)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Proyecto único con 15 ejercicios completamente documentados."/>
+    </comp>
+    <comp lib="8" loc="(80,140)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Seleccione un circuito en el árbol de la izquierda para abrirlo."/>
+    </comp>
+    <comp lib="8" loc="(80,200)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1. Pasar del circuito al álgebra"/>
+    </comp>
+    <comp lib="8" loc="(100,240)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="A_RON"/>
+    </comp>
+    <comp lib="8" loc="(100,270)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="B_GINEBRA"/>
+    </comp>
+    <comp lib="8" loc="(100,300)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="C_WHISKEY"/>
+    </comp>
+    <comp lib="8" loc="(100,330)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="D_AGUA"/>
+    </comp>
+    <comp lib="8" loc="(100,360)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="E_VODKA"/>
+    </comp>
+    <comp lib="8" loc="(100,390)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="F_TEQUILA"/>
+    </comp>
+    <comp lib="8" loc="(100,420)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="G_BRANDY"/>
+    </comp>
+    <comp lib="8" loc="(100,450)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="H_CACHACA"/>
+    </comp>
+    <comp lib="8" loc="(100,480)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="I_PACHARAN"/>
+    </comp>
+    <comp lib="8" loc="(100,510)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="J_VINO"/>
+    </comp>
+    <comp lib="8" loc="(430,200)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="2. Pasar del álgebra al circuito"/>
+    </comp>
+    <comp lib="8" loc="(450,240)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="K_BENEDETTI"/>
+    </comp>
+    <comp lib="8" loc="(450,270)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="L_MACHADO"/>
+    </comp>
+    <comp lib="8" loc="(450,300)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="M_TAGORE"/>
+    </comp>
+    <comp lib="8" loc="(450,330)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="N_CORTAZAR"/>
+    </comp>
+    <comp lib="8" loc="(450,360)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="O_NERUDA"/>
+    </comp>
+    <comp lib="8" loc="(430,430)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Convención: + = OR, · = AND, ¬ = NOT, ⊕ = XOR."/>
+    </comp>
+    <comp lib="8" loc="(430,470)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Cada pestaña incluye circuito, explicación y función."/>
+    </comp>
+    <comp lib="8" loc="(430,500)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="También incluye su tabla de verdad exhaustiva."/>
+    </comp>
+  </circuit>
+  <circuit name="A_RON">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="A_RON"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="8" loc="(80,30)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Ejercicio a — RON"/>
+    </comp>
+    <comp lib="0" loc="(80,100)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(80,240)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp lib="1" loc="(300,100)" name="NOT Gate"/>
+    <comp lib="1" loc="(540,160)" name="AND Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="0" loc="(920,160)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="RON"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="8" loc="(80,420)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Función original: RON = ¬A · B"/>
+    </comp>
+    <comp lib="8" loc="(80,450)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Forma simplificada: RON = ¬A · B"/>
+    </comp>
+    <comp lib="8" loc="(80,480)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Explicación: Se invierte A y el resultado se combina con B"/>
+    </comp>
+    <comp lib="8" loc="(80,510)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="mediante una AND."/>
+    </comp>
+    <comp lib="8" loc="(730,420)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Tabla de verdad"/>
+    </comp>
+    <comp lib="8" loc="(730,450)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="A    B    |    RON"/>
+    </comp>
+    <comp lib="8" loc="(730,480)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,510)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,540)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,570)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    |    0"/>
+    </comp>
+    <wire from="(80,100)" to="(270,100)"/>
+    <wire from="(300,100)" to="(400,100)"/>
+    <wire from="(400,100)" to="(400,150)"/>
+    <wire from="(400,150)" to="(510,150)"/>
+    <wire from="(80,240)" to="(430,240)"/>
+    <wire from="(430,240)" to="(430,170)"/>
+    <wire from="(430,170)" to="(510,170)"/>
+    <wire from="(540,160)" to="(920,160)"/>
+  </circuit>
+  <circuit name="B_GINEBRA">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="B_GINEBRA"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="8" loc="(80,30)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Ejercicio b — GINEBRA"/>
+    </comp>
+    <comp lib="0" loc="(80,100)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(80,240)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp lib="1" loc="(300,240)" name="NOT Gate"/>
+    <comp lib="1" loc="(540,160)" name="OR Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="0" loc="(920,160)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="GINEBRA"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="8" loc="(80,420)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Función original: GINEBRA = A + ¬B"/>
+    </comp>
+    <comp lib="8" loc="(80,450)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Forma simplificada: GINEBRA = A + ¬B"/>
+    </comp>
+    <comp lib="8" loc="(80,480)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Explicación: B se invierte y luego se aplica OR entre A y ¬B."/>
+    </comp>
+    <comp lib="8" loc="(730,420)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Tabla de verdad"/>
+    </comp>
+    <comp lib="8" loc="(730,450)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="A    B    |    GINEBRA"/>
+    </comp>
+    <comp lib="8" loc="(730,480)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,510)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,540)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,570)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    |    1"/>
+    </comp>
+    <wire from="(80,240)" to="(270,240)"/>
+    <wire from="(80,100)" to="(430,100)"/>
+    <wire from="(430,100)" to="(430,150)"/>
+    <wire from="(430,150)" to="(510,150)"/>
+    <wire from="(300,240)" to="(450,240)"/>
+    <wire from="(450,240)" to="(450,170)"/>
+    <wire from="(450,170)" to="(510,170)"/>
+    <wire from="(540,160)" to="(920,160)"/>
+  </circuit>
+  <circuit name="C_WHISKEY">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="C_WHISKEY"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="8" loc="(80,30)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Ejercicio c — WHISKEY"/>
+    </comp>
+    <comp lib="0" loc="(80,100)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(80,240)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp lib="1" loc="(300,100)" name="NOT Gate"/>
+    <comp lib="1" loc="(360,280)" name="AND Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(600,170)" name="OR Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="0" loc="(920,170)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="WHISKEY"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="8" loc="(80,420)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Función original: WHISKEY = ¬A + A·B"/>
+    </comp>
+    <comp lib="8" loc="(80,450)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Forma simplificada: WHISKEY = ¬A + B"/>
+    </comp>
+    <comp lib="8" loc="(80,480)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Explicación: Una rama produce ¬A; la otra A·B. Ambas se unen con"/>
+    </comp>
+    <comp lib="8" loc="(80,510)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="OR."/>
+    </comp>
+    <comp lib="8" loc="(730,420)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Tabla de verdad"/>
+    </comp>
+    <comp lib="8" loc="(730,450)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="A    B    |    WHISKEY"/>
+    </comp>
+    <comp lib="8" loc="(730,480)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,510)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,540)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,570)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    |    1"/>
+    </comp>
+    <wire from="(80,100)" to="(220,100)"/>
+    <wire from="(220,100)" to="(270,100)"/>
+    <wire from="(220,100)" to="(220,270)"/>
+    <wire from="(220,270)" to="(330,270)"/>
+    <wire from="(80,240)" to="(250,240)"/>
+    <wire from="(250,240)" to="(250,290)"/>
+    <wire from="(250,290)" to="(330,290)"/>
+    <wire from="(300,100)" to="(500,100)"/>
+    <wire from="(500,100)" to="(500,160)"/>
+    <wire from="(500,160)" to="(570,160)"/>
+    <wire from="(360,280)" to="(520,280)"/>
+    <wire from="(520,280)" to="(520,180)"/>
+    <wire from="(520,180)" to="(570,180)"/>
+    <wire from="(600,170)" to="(920,170)"/>
+  </circuit>
+  <circuit name="D_AGUA">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="D_AGUA"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="8" loc="(80,30)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Ejercicio d — AGUA"/>
+    </comp>
+    <comp lib="0" loc="(80,100)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(80,300)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp lib="1" loc="(300,180)" name="NOT Gate"/>
+    <comp lib="1" loc="(300,220)" name="NOT Gate"/>
+    <comp lib="1" loc="(520,130)" name="AND Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(520,250)" name="AND Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(720,190)" name="OR Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="0" loc="(920,190)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="AGUA"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="8" loc="(80,400)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Función original: AGUA = A·¬B + ¬A·B"/>
+    </comp>
+    <comp lib="8" loc="(80,430)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Forma simplificada: AGUA = A ⊕ B"/>
+    </comp>
+    <comp lib="8" loc="(80,460)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Explicación: Las dos AND detectan entradas distintas; la OR"/>
+    </comp>
+    <comp lib="8" loc="(80,490)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="implementa XOR."/>
+    </comp>
+    <comp lib="8" loc="(730,400)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Tabla de verdad"/>
+    </comp>
+    <comp lib="8" loc="(730,430)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="A    B    |    AGUA"/>
+    </comp>
+    <comp lib="8" loc="(730,460)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,490)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,520)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,550)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    |    0"/>
+    </comp>
+    <wire from="(80,100)" to="(180,100)"/>
+    <wire from="(180,100)" to="(180,180)"/>
+    <wire from="(180,180)" to="(270,180)"/>
+    <wire from="(180,100)" to="(200,100)"/>
+    <wire from="(200,100)" to="(200,120)"/>
+    <wire from="(200,120)" to="(490,120)"/>
+    <wire from="(80,300)" to="(220,300)"/>
+    <wire from="(220,300)" to="(220,220)"/>
+    <wire from="(220,220)" to="(270,220)"/>
+    <wire from="(220,300)" to="(240,300)"/>
+    <wire from="(240,300)" to="(240,260)"/>
+    <wire from="(240,260)" to="(490,260)"/>
+    <wire from="(300,180)" to="(450,180)"/>
+    <wire from="(450,180)" to="(450,240)"/>
+    <wire from="(450,240)" to="(490,240)"/>
+    <wire from="(300,220)" to="(430,220)"/>
+    <wire from="(430,220)" to="(430,140)"/>
+    <wire from="(430,140)" to="(490,140)"/>
+    <wire from="(520,130)" to="(620,130)"/>
+    <wire from="(620,130)" to="(620,180)"/>
+    <wire from="(620,180)" to="(690,180)"/>
+    <wire from="(520,250)" to="(640,250)"/>
+    <wire from="(640,250)" to="(640,200)"/>
+    <wire from="(640,200)" to="(690,200)"/>
+    <wire from="(720,190)" to="(920,190)"/>
+  </circuit>
+  <circuit name="E_VODKA">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="E_VODKA"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="8" loc="(80,30)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Ejercicio e — VODKA"/>
+    </comp>
+    <comp lib="0" loc="(80,100)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(80,300)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp lib="1" loc="(300,100)" name="NOT Gate"/>
+    <comp lib="1" loc="(420,250)" name="NAND Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(650,170)" name="OR Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="0" loc="(920,170)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="VODKA"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="8" loc="(80,420)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Función original: VODKA = ¬A + ¬(A·B)"/>
+    </comp>
+    <comp lib="8" loc="(80,450)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Forma simplificada: VODKA = ¬A + ¬B = ¬(A·B)"/>
+    </comp>
+    <comp lib="8" loc="(80,480)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Explicación: Se hace OR entre ¬A y la salida NAND de A con B."/>
+    </comp>
+    <comp lib="8" loc="(730,420)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Tabla de verdad"/>
+    </comp>
+    <comp lib="8" loc="(730,450)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="A    B    |    VODKA"/>
+    </comp>
+    <comp lib="8" loc="(730,480)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,510)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,540)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,570)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    |    0"/>
+    </comp>
+    <wire from="(80,100)" to="(200,100)"/>
+    <wire from="(200,100)" to="(270,100)"/>
+    <wire from="(200,100)" to="(200,240)"/>
+    <wire from="(200,240)" to="(380,240)"/>
+    <wire from="(80,300)" to="(260,300)"/>
+    <wire from="(260,300)" to="(260,260)"/>
+    <wire from="(260,260)" to="(380,260)"/>
+    <wire from="(300,100)" to="(540,100)"/>
+    <wire from="(540,100)" to="(540,160)"/>
+    <wire from="(540,160)" to="(620,160)"/>
+    <wire from="(420,250)" to="(560,250)"/>
+    <wire from="(560,250)" to="(560,180)"/>
+    <wire from="(560,180)" to="(620,180)"/>
+    <wire from="(650,170)" to="(920,170)"/>
+  </circuit>
+  <circuit name="F_TEQUILA">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="F_TEQUILA"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="8" loc="(80,30)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Ejercicio f — TEQUILA"/>
+    </comp>
+    <comp lib="0" loc="(80,80)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(80,170)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp lib="0" loc="(80,260)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="C"/>
+    </comp>
+    <comp lib="1" loc="(400,110)" name="NAND Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(400,230)" name="NOR Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(650,170)" name="OR Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="0" loc="(920,170)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="TEQUILA"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="8" loc="(80,420)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Función original: TEQUILA = ¬(A·B) + ¬(B+C)"/>
+    </comp>
+    <comp lib="8" loc="(80,450)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Forma simplificada: TEQUILA = ¬A + ¬B = ¬(A·B)"/>
+    </comp>
+    <comp lib="8" loc="(80,480)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Explicación: Una NAND procesa A,B; una NOR procesa B,C; sus"/>
+    </comp>
+    <comp lib="8" loc="(80,510)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="salidas van a OR."/>
+    </comp>
+    <comp lib="8" loc="(730,420)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Tabla de verdad"/>
+    </comp>
+    <comp lib="8" loc="(730,450)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="A    B    C    |    TEQUILA"/>
+    </comp>
+    <comp lib="8" loc="(730,480)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,510)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,540)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,570)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,600)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,630)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,660)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    0    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,690)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    1    |    0"/>
+    </comp>
+    <wire from="(80,80)" to="(200,80)"/>
+    <wire from="(200,80)" to="(200,100)"/>
+    <wire from="(200,100)" to="(360,100)"/>
+    <wire from="(80,170)" to="(270,170)"/>
+    <wire from="(270,170)" to="(270,120)"/>
+    <wire from="(270,120)" to="(360,120)"/>
+    <wire from="(270,170)" to="(270,220)"/>
+    <wire from="(270,220)" to="(360,220)"/>
+    <wire from="(80,260)" to="(300,260)"/>
+    <wire from="(300,260)" to="(300,240)"/>
+    <wire from="(300,240)" to="(360,240)"/>
+    <wire from="(400,110)" to="(540,110)"/>
+    <wire from="(540,110)" to="(540,160)"/>
+    <wire from="(540,160)" to="(620,160)"/>
+    <wire from="(400,230)" to="(560,230)"/>
+    <wire from="(560,230)" to="(560,180)"/>
+    <wire from="(560,180)" to="(620,180)"/>
+    <wire from="(650,170)" to="(920,170)"/>
+  </circuit>
+  <circuit name="G_BRANDY">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="G_BRANDY"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="8" loc="(80,30)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Ejercicio g — BRANDY"/>
+    </comp>
+    <comp lib="0" loc="(80,80)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(80,170)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp lib="0" loc="(80,260)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="C"/>
+    </comp>
+    <comp lib="1" loc="(300,80)" name="NOT Gate"/>
+    <comp lib="1" loc="(420,260)" name="NAND Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(670,160)" name="OR Gate">
+      <a name="inputs" val="3"/>
+      <a name="size" val="50"/>
+    </comp>
+    <comp lib="0" loc="(920,160)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="BRANDY"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="8" loc="(80,420)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Función original: BRANDY = ¬A + B + ¬(A·C)"/>
+    </comp>
+    <comp lib="8" loc="(80,450)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Forma simplificada: BRANDY = ¬A + B + ¬C"/>
+    </comp>
+    <comp lib="8" loc="(80,480)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Explicación: La OR de tres entradas reúne ¬A, B y la NAND de A con"/>
+    </comp>
+    <comp lib="8" loc="(80,510)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="C."/>
+    </comp>
+    <comp lib="8" loc="(730,420)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Tabla de verdad"/>
+    </comp>
+    <comp lib="8" loc="(730,450)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="A    B    C    |    BRANDY"/>
+    </comp>
+    <comp lib="8" loc="(730,480)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,510)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,540)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,570)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,600)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,630)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    1    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,660)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,690)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    1    |    1"/>
+    </comp>
+    <wire from="(80,80)" to="(200,80)"/>
+    <wire from="(200,80)" to="(270,80)"/>
+    <wire from="(200,80)" to="(220,80)"/>
+    <wire from="(220,80)" to="(220,250)"/>
+    <wire from="(220,250)" to="(380,250)"/>
+    <wire from="(80,260)" to="(240,260)"/>
+    <wire from="(240,260)" to="(240,270)"/>
+    <wire from="(240,270)" to="(380,270)"/>
+    <wire from="(300,80)" to="(560,80)"/>
+    <wire from="(560,80)" to="(560,140)"/>
+    <wire from="(560,140)" to="(620,140)"/>
+    <wire from="(80,170)" to="(540,170)"/>
+    <wire from="(540,170)" to="(540,160)"/>
+    <wire from="(540,160)" to="(620,160)"/>
+    <wire from="(420,260)" to="(580,260)"/>
+    <wire from="(580,260)" to="(580,180)"/>
+    <wire from="(580,180)" to="(620,180)"/>
+    <wire from="(670,160)" to="(920,160)"/>
+  </circuit>
+  <circuit name="H_CACHACA">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="H_CACHACA"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="8" loc="(80,30)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Ejercicio h — CACHACA"/>
+    </comp>
+    <comp lib="0" loc="(80,80)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(80,170)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp lib="0" loc="(80,260)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="C"/>
+    </comp>
+    <comp lib="1" loc="(400,110)" name="XOR Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(400,250)" name="XNOR Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(650,180)" name="OR Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="0" loc="(920,180)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="CACHACA"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="8" loc="(80,420)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Función original: CACHACA = (A ⊕ B) + ¬(B ⊕ C)"/>
+    </comp>
+    <comp lib="8" loc="(80,450)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Forma simplificada: CACHACA = (A ⊕ B) + (B XNOR C)"/>
+    </comp>
+    <comp lib="8" loc="(80,480)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Explicación: La rama superior es XOR, la inferior XNOR y luego se"/>
+    </comp>
+    <comp lib="8" loc="(80,510)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="aplica OR."/>
+    </comp>
+    <comp lib="8" loc="(730,420)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Tabla de verdad"/>
+    </comp>
+    <comp lib="8" loc="(730,450)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="A    B    C    |    CACHACA"/>
+    </comp>
+    <comp lib="8" loc="(730,480)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,510)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    1    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,540)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,570)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,600)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,630)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,660)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    0    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,690)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    1    |    1"/>
+    </comp>
+    <wire from="(80,80)" to="(220,80)"/>
+    <wire from="(220,80)" to="(220,100)"/>
+    <wire from="(220,100)" to="(370,100)"/>
+    <wire from="(80,170)" to="(280,170)"/>
+    <wire from="(280,170)" to="(280,120)"/>
+    <wire from="(280,120)" to="(370,120)"/>
+    <wire from="(280,170)" to="(280,240)"/>
+    <wire from="(280,240)" to="(360,240)"/>
+    <wire from="(80,260)" to="(360,260)"/>
+    <wire from="(400,110)" to="(550,110)"/>
+    <wire from="(550,110)" to="(550,170)"/>
+    <wire from="(550,170)" to="(620,170)"/>
+    <wire from="(400,250)" to="(570,250)"/>
+    <wire from="(570,250)" to="(570,190)"/>
+    <wire from="(570,190)" to="(620,190)"/>
+    <wire from="(650,180)" to="(920,180)"/>
+  </circuit>
+  <circuit name="I_PACHARAN">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="I_PACHARAN"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="8" loc="(80,30)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Ejercicio i — PACHARAN"/>
+    </comp>
+    <comp lib="0" loc="(80,60)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(80,170)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp lib="0" loc="(80,270)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="C"/>
+    </comp>
+    <comp lib="1" loc="(300,60)" name="NOT Gate"/>
+    <comp lib="1" loc="(300,170)" name="NOT Gate"/>
+    <comp lib="1" loc="(300,270)" name="NOT Gate"/>
+    <comp lib="1" loc="(650,80)" name="AND Gate">
+      <a name="inputs" val="3"/>
+      <a name="size" val="50"/>
+    </comp>
+    <comp lib="1" loc="(650,170)" name="AND Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(650,260)" name="AND Gate">
+      <a name="inputs" val="3"/>
+      <a name="size" val="50"/>
+    </comp>
+    <comp lib="1" loc="(650,350)" name="AND Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(850,215)" name="OR Gate">
+      <a name="inputs" val="4"/>
+      <a name="size" val="70"/>
+    </comp>
+    <comp lib="0" loc="(980,215)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="PACHARAN"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="8" loc="(80,440)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Función original: PACHARAN = ¬A·B·C + ¬B·C + ¬A·B·¬C + A·¬C"/>
+    </comp>
+    <comp lib="8" loc="(80,470)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Forma simplificada: PACHARAN = ¬A·B + ¬B·C + A·¬C"/>
+    </comp>
+    <comp lib="8" loc="(80,500)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Explicación: Cuatro productos canónicos/parciales se combinan"/>
+    </comp>
+    <comp lib="8" loc="(80,530)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="mediante una OR de cuatro entradas."/>
+    </comp>
+    <comp lib="8" loc="(760,440)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Tabla de verdad"/>
+    </comp>
+    <comp lib="8" loc="(760,470)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="A    B    C    |    PACHARAN"/>
+    </comp>
+    <comp lib="8" loc="(760,500)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    0    |    0"/>
+    </comp>
+    <comp lib="8" loc="(760,530)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(760,560)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(760,590)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(760,620)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(760,650)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(760,680)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(760,710)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    1    |    0"/>
+    </comp>
+    <wire from="(80,60)" to="(160,60)"/>
+    <wire from="(160,60)" to="(270,60)"/>
+    <wire from="(80,170)" to="(200,170)"/>
+    <wire from="(200,170)" to="(270,170)"/>
+    <wire from="(80,270)" to="(240,270)"/>
+    <wire from="(240,270)" to="(270,270)"/>
+    <wire from="(300,60)" to="(340,60)"/>
+    <wire from="(300,170)" to="(380,170)"/>
+    <wire from="(300,270)" to="(420,270)"/>
+    <wire from="(160,60)" to="(160,340)"/>
+    <wire from="(200,80)" to="(200,170)"/>
+    <wire from="(200,170)" to="(200,260)"/>
+    <wire from="(240,100)" to="(240,180)"/>
+    <wire from="(240,180)" to="(240,270)"/>
+    <wire from="(340,60)" to="(340,240)"/>
+    <wire from="(380,160)" to="(380,170)"/>
+    <wire from="(420,270)" to="(420,280)"/>
+    <wire from="(420,280)" to="(420,360)"/>
+    <wire from="(340,60)" to="(600,60)"/>
+    <wire from="(200,80)" to="(600,80)"/>
+    <wire from="(240,100)" to="(600,100)"/>
+    <wire from="(380,160)" to="(620,160)"/>
+    <wire from="(240,180)" to="(620,180)"/>
+    <wire from="(340,240)" to="(600,240)"/>
+    <wire from="(200,260)" to="(600,260)"/>
+    <wire from="(420,280)" to="(600,280)"/>
+    <wire from="(160,340)" to="(620,340)"/>
+    <wire from="(420,360)" to="(620,360)"/>
+    <wire from="(650,80)" to="(740,80)"/>
+    <wire from="(740,80)" to="(740,185)"/>
+    <wire from="(740,185)" to="(780,185)"/>
+    <wire from="(650,170)" to="(720,170)"/>
+    <wire from="(720,170)" to="(720,205)"/>
+    <wire from="(720,205)" to="(780,205)"/>
+    <wire from="(650,260)" to="(700,260)"/>
+    <wire from="(700,260)" to="(700,225)"/>
+    <wire from="(700,225)" to="(780,225)"/>
+    <wire from="(650,350)" to="(680,350)"/>
+    <wire from="(680,350)" to="(680,245)"/>
+    <wire from="(680,245)" to="(780,245)"/>
+    <wire from="(850,215)" to="(980,215)"/>
+  </circuit>
+  <circuit name="J_VINO">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="J_VINO"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="8" loc="(80,30)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Ejercicio j — VINO"/>
+    </comp>
+    <comp lib="0" loc="(80,80)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(80,170)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp lib="0" loc="(80,260)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="C"/>
+    </comp>
+    <comp lib="1" loc="(300,80)" name="NOT Gate"/>
+    <comp lib="1" loc="(300,170)" name="NOT Gate"/>
+    <comp lib="1" loc="(520,120)" name="NOR Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(520,260)" name="AND Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(750,190)" name="XOR Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="0" loc="(920,190)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="VINO"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="8" loc="(80,420)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Función original: VINO = ¬(¬A + ¬B) ⊕ (B·C)"/>
+    </comp>
+    <comp lib="8" loc="(80,450)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Forma simplificada: VINO = (A·B) ⊕ (B·C)"/>
+    </comp>
+    <comp lib="8" loc="(80,480)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Explicación: La NOR de ¬A,¬B produce A·B; luego se aplica XOR con"/>
+    </comp>
+    <comp lib="8" loc="(80,510)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="B·C."/>
+    </comp>
+    <comp lib="8" loc="(730,420)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Tabla de verdad"/>
+    </comp>
+    <comp lib="8" loc="(730,450)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="A    B    C    |    VINO"/>
+    </comp>
+    <comp lib="8" loc="(730,480)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    0    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,510)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    1    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,540)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    0    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,570)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,600)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    0    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,630)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    1    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,660)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,690)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    1    |    0"/>
+    </comp>
+    <wire from="(80,80)" to="(270,80)"/>
+    <wire from="(80,170)" to="(200,170)"/>
+    <wire from="(200,170)" to="(270,170)"/>
+    <wire from="(200,170)" to="(200,250)"/>
+    <wire from="(200,250)" to="(490,250)"/>
+    <wire from="(80,260)" to="(220,260)"/>
+    <wire from="(220,260)" to="(220,270)"/>
+    <wire from="(220,270)" to="(490,270)"/>
+    <wire from="(300,80)" to="(420,80)"/>
+    <wire from="(420,80)" to="(420,110)"/>
+    <wire from="(420,110)" to="(480,110)"/>
+    <wire from="(300,170)" to="(440,170)"/>
+    <wire from="(440,170)" to="(440,130)"/>
+    <wire from="(440,130)" to="(480,130)"/>
+    <wire from="(520,120)" to="(640,120)"/>
+    <wire from="(640,120)" to="(640,180)"/>
+    <wire from="(640,180)" to="(720,180)"/>
+    <wire from="(520,260)" to="(660,260)"/>
+    <wire from="(660,260)" to="(660,200)"/>
+    <wire from="(660,200)" to="(720,200)"/>
+    <wire from="(750,190)" to="(920,190)"/>
+  </circuit>
+  <circuit name="K_BENEDETTI">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="K_BENEDETTI"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="8" loc="(80,30)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Álgebra → circuito — BENEDETTI"/>
+    </comp>
+    <comp lib="0" loc="(80,80)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(80,320)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp lib="1" loc="(400,120)" name="NAND Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(300,210)" name="NOT Gate"/>
+    <comp lib="1" loc="(300,290)" name="NOT Gate"/>
+    <comp lib="1" loc="(520,260)" name="AND Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(720,180)" name="OR Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="0" loc="(920,180)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="BENEDETTI"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="8" loc="(80,410)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Función original: BENEDETTI = ¬(A·B) + ¬A·¬B"/>
+    </comp>
+    <comp lib="8" loc="(80,440)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Forma simplificada: BENEDETTI = ¬(A·B) = ¬A + ¬B"/>
+    </comp>
+    <comp lib="8" loc="(80,470)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Explicación: Se implementan una NAND y el producto ¬A·¬B; luego se"/>
+    </comp>
+    <comp lib="8" loc="(80,500)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="unen con OR."/>
+    </comp>
+    <comp lib="8" loc="(730,410)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Tabla de verdad"/>
+    </comp>
+    <comp lib="8" loc="(730,440)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="A    B    |    BENEDETTI"/>
+    </comp>
+    <comp lib="8" loc="(730,470)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,500)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,530)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,560)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    |    0"/>
+    </comp>
+    <wire from="(80,80)" to="(200,80)"/>
+    <wire from="(200,80)" to="(200,210)"/>
+    <wire from="(200,210)" to="(270,210)"/>
+    <wire from="(200,80)" to="(220,80)"/>
+    <wire from="(220,80)" to="(220,110)"/>
+    <wire from="(220,110)" to="(360,110)"/>
+    <wire from="(80,320)" to="(240,320)"/>
+    <wire from="(240,320)" to="(240,290)"/>
+    <wire from="(240,290)" to="(270,290)"/>
+    <wire from="(240,320)" to="(330,320)"/>
+    <wire from="(330,320)" to="(330,130)"/>
+    <wire from="(330,130)" to="(360,130)"/>
+    <wire from="(300,210)" to="(420,210)"/>
+    <wire from="(420,210)" to="(420,250)"/>
+    <wire from="(420,250)" to="(490,250)"/>
+    <wire from="(300,290)" to="(440,290)"/>
+    <wire from="(440,290)" to="(440,270)"/>
+    <wire from="(440,270)" to="(490,270)"/>
+    <wire from="(400,120)" to="(620,120)"/>
+    <wire from="(620,120)" to="(620,170)"/>
+    <wire from="(620,170)" to="(690,170)"/>
+    <wire from="(520,260)" to="(640,260)"/>
+    <wire from="(640,260)" to="(640,190)"/>
+    <wire from="(640,190)" to="(690,190)"/>
+    <wire from="(720,180)" to="(920,180)"/>
+  </circuit>
+  <circuit name="L_MACHADO">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="L_MACHADO"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="8" loc="(80,30)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Álgebra → circuito — MACHADO"/>
+    </comp>
+    <comp lib="0" loc="(80,80)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(80,170)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp lib="0" loc="(80,280)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="C"/>
+    </comp>
+    <comp lib="1" loc="(400,100)" name="NAND Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(300,280)" name="NOT Gate"/>
+    <comp lib="1" loc="(520,250)" name="NOR Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(740,170)" name="OR Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="0" loc="(920,170)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="MACHADO"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="8" loc="(80,420)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Función original: MACHADO = ¬(B·C) + ¬(A + ¬C)"/>
+    </comp>
+    <comp lib="8" loc="(80,450)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Forma simplificada: MACHADO = ¬A + ¬B + ¬C = ¬(A·B·C)"/>
+    </comp>
+    <comp lib="8" loc="(80,480)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Explicación: La primera rama es NAND(B,C); la segunda es"/>
+    </comp>
+    <comp lib="8" loc="(80,510)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="NOR(A,¬C); luego OR."/>
+    </comp>
+    <comp lib="8" loc="(730,420)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Tabla de verdad"/>
+    </comp>
+    <comp lib="8" loc="(730,450)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="A    B    C    |    MACHADO"/>
+    </comp>
+    <comp lib="8" loc="(730,480)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,510)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,540)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,570)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,600)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,630)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,660)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,690)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    1    |    0"/>
+    </comp>
+    <wire from="(80,170)" to="(180,170)"/>
+    <wire from="(180,170)" to="(180,90)"/>
+    <wire from="(180,90)" to="(360,90)"/>
+    <wire from="(80,280)" to="(220,280)"/>
+    <wire from="(220,280)" to="(270,280)"/>
+    <wire from="(220,280)" to="(260,280)"/>
+    <wire from="(260,280)" to="(260,110)"/>
+    <wire from="(260,110)" to="(360,110)"/>
+    <wire from="(80,80)" to="(420,80)"/>
+    <wire from="(420,80)" to="(420,240)"/>
+    <wire from="(420,240)" to="(480,240)"/>
+    <wire from="(300,280)" to="(440,280)"/>
+    <wire from="(440,280)" to="(440,260)"/>
+    <wire from="(440,260)" to="(480,260)"/>
+    <wire from="(400,100)" to="(640,100)"/>
+    <wire from="(640,100)" to="(640,160)"/>
+    <wire from="(640,160)" to="(710,160)"/>
+    <wire from="(520,250)" to="(660,250)"/>
+    <wire from="(660,250)" to="(660,180)"/>
+    <wire from="(660,180)" to="(710,180)"/>
+    <wire from="(740,170)" to="(920,170)"/>
+  </circuit>
+  <circuit name="M_TAGORE">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="M_TAGORE"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="8" loc="(80,30)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Álgebra → circuito — TAGORE"/>
+    </comp>
+    <comp lib="0" loc="(80,80)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(80,170)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp lib="0" loc="(80,300)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="C"/>
+    </comp>
+    <comp lib="1" loc="(300,300)" name="NOT Gate"/>
+    <comp lib="1" loc="(520,120)" name="NOR Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(300,170)" name="NOT Gate"/>
+    <comp lib="1" loc="(520,300)" name="NOT Gate"/>
+    <comp lib="1" loc="(740,200)" name="OR Gate">
+      <a name="inputs" val="3"/>
+      <a name="size" val="50"/>
+    </comp>
+    <comp lib="0" loc="(920,200)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="TAGORE"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="8" loc="(80,410)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Función original: TAGORE = ¬(A + ¬C) + ¬B + ¬¬C"/>
+    </comp>
+    <comp lib="8" loc="(80,440)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Forma simplificada: TAGORE = ¬B + C"/>
+    </comp>
+    <comp lib="8" loc="(80,470)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Explicación: Se respetan la NOR de A,¬C, el inversor de B y la"/>
+    </comp>
+    <comp lib="8" loc="(80,500)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="doble inversión de C."/>
+    </comp>
+    <comp lib="8" loc="(730,410)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Tabla de verdad"/>
+    </comp>
+    <comp lib="8" loc="(730,440)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="A    B    C    |    TAGORE"/>
+    </comp>
+    <comp lib="8" loc="(730,470)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,500)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,530)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    0    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,560)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,590)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,620)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,650)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    0    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,680)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    1    |    1"/>
+    </comp>
+    <wire from="(80,80)" to="(440,80)"/>
+    <wire from="(440,80)" to="(440,110)"/>
+    <wire from="(440,110)" to="(480,110)"/>
+    <wire from="(80,170)" to="(270,170)"/>
+    <wire from="(80,300)" to="(270,300)"/>
+    <wire from="(300,300)" to="(490,300)"/>
+    <wire from="(300,300)" to="(420,300)"/>
+    <wire from="(420,300)" to="(420,130)"/>
+    <wire from="(420,130)" to="(480,130)"/>
+    <wire from="(520,120)" to="(640,120)"/>
+    <wire from="(640,120)" to="(640,180)"/>
+    <wire from="(640,180)" to="(690,180)"/>
+    <wire from="(300,170)" to="(360,170)"/>
+    <wire from="(360,170)" to="(360,100)"/>
+    <wire from="(360,100)" to="(660,100)"/>
+    <wire from="(660,100)" to="(660,200)"/>
+    <wire from="(660,200)" to="(690,200)"/>
+    <wire from="(520,300)" to="(670,300)"/>
+    <wire from="(670,300)" to="(670,220)"/>
+    <wire from="(670,220)" to="(690,220)"/>
+    <wire from="(740,200)" to="(920,200)"/>
+  </circuit>
+  <circuit name="N_CORTAZAR">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="N_CORTAZAR"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="8" loc="(80,30)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Álgebra → circuito — CORTAZAR"/>
+    </comp>
+    <comp lib="0" loc="(80,80)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(80,170)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp lib="0" loc="(80,280)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="C"/>
+    </comp>
+    <comp lib="1" loc="(300,170)" name="NOT Gate"/>
+    <comp lib="1" loc="(520,130)" name="NAND Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(740,200)" name="NOR Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="0" loc="(920,200)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="CORTAZAR"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="8" loc="(80,420)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Función original: CORTAZAR = ¬( ¬(A·¬B) + C )"/>
+    </comp>
+    <comp lib="8" loc="(80,450)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Forma simplificada: CORTAZAR = A·¬B·¬C"/>
+    </comp>
+    <comp lib="8" loc="(80,480)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Explicación: Se invierte B, se forma ¬(A·¬B) con NAND y la barra"/>
+    </comp>
+    <comp lib="8" loc="(80,510)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="exterior se implementa con NOR."/>
+    </comp>
+    <comp lib="8" loc="(730,420)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Tabla de verdad"/>
+    </comp>
+    <comp lib="8" loc="(730,450)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="A    B    C    |    CORTAZAR"/>
+    </comp>
+    <comp lib="8" loc="(730,480)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    0    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,510)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    1    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,540)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    0    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,570)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    1    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,600)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,630)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    1    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,660)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    0    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,690)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    1    |    0"/>
+    </comp>
+    <wire from="(80,170)" to="(270,170)"/>
+    <wire from="(80,80)" to="(400,80)"/>
+    <wire from="(400,80)" to="(400,120)"/>
+    <wire from="(400,120)" to="(480,120)"/>
+    <wire from="(300,170)" to="(420,170)"/>
+    <wire from="(420,170)" to="(420,140)"/>
+    <wire from="(420,140)" to="(480,140)"/>
+    <wire from="(520,130)" to="(620,130)"/>
+    <wire from="(620,130)" to="(620,190)"/>
+    <wire from="(620,190)" to="(700,190)"/>
+    <wire from="(80,280)" to="(640,280)"/>
+    <wire from="(640,280)" to="(640,210)"/>
+    <wire from="(640,210)" to="(700,210)"/>
+    <wire from="(740,200)" to="(920,200)"/>
+  </circuit>
+  <circuit name="O_NERUDA">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="O_NERUDA"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="8" loc="(80,30)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Álgebra → circuito — NERUDA"/>
+    </comp>
+    <comp lib="0" loc="(80,80)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(80,170)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp lib="0" loc="(80,280)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="C"/>
+    </comp>
+    <comp lib="1" loc="(300,170)" name="NOT Gate"/>
+    <comp lib="1" loc="(520,110)" name="NOR Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(520,260)" name="NAND Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(750,180)" name="XNOR Gate">
+      <a name="inputs" val="2"/>
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="0" loc="(920,180)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="NERUDA"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="8" loc="(80,420)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Función original: NERUDA = ¬( ¬(A + ¬B) ⊕ ¬(¬B·C) )"/>
+    </comp>
+    <comp lib="8" loc="(80,450)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Forma simplificada: NERUDA = ¬A·B + ¬A·C + ¬B·C"/>
+    </comp>
+    <comp lib="8" loc="(80,480)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Explicación: Las ramas NOR(A,¬B) y NAND(¬B,C) entran a una XNOR,"/>
+    </comp>
+    <comp lib="8" loc="(80,510)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="que representa la barra del XOR."/>
+    </comp>
+    <comp lib="8" loc="(730,420)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="Tabla de verdad"/>
+    </comp>
+    <comp lib="8" loc="(730,450)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="A    B    C    |    NERUDA"/>
+    </comp>
+    <comp lib="8" loc="(730,480)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    0    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,510)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    0    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,540)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    0    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,570)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="0    1    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,600)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    0    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,630)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    0    1    |    1"/>
+    </comp>
+    <comp lib="8" loc="(730,660)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    0    |    0"/>
+    </comp>
+    <comp lib="8" loc="(730,690)" name="Text">
+      <a name="halign" val="left"/>
+      <a name="text" val="1    1    1    |    0"/>
+    </comp>
+    <wire from="(80,170)" to="(270,170)"/>
+    <wire from="(80,80)" to="(400,80)"/>
+    <wire from="(400,80)" to="(400,100)"/>
+    <wire from="(400,100)" to="(480,100)"/>
+    <wire from="(300,170)" to="(380,170)"/>
+    <wire from="(380,170)" to="(420,170)"/>
+    <wire from="(420,170)" to="(420,120)"/>
+    <wire from="(420,120)" to="(480,120)"/>
+    <wire from="(380,170)" to="(380,250)"/>
+    <wire from="(380,250)" to="(480,250)"/>
+    <wire from="(80,280)" to="(420,280)"/>
+    <wire from="(420,280)" to="(420,270)"/>
+    <wire from="(420,270)" to="(480,270)"/>
+    <wire from="(520,110)" to="(630,110)"/>
+    <wire from="(630,110)" to="(630,170)"/>
+    <wire from="(630,170)" to="(710,170)"/>
+    <wire from="(520,260)" to="(650,260)"/>
+    <wire from="(650,260)" to="(650,190)"/>
+    <wire from="(650,190)" to="(710,190)"/>
+    <wire from="(750,180)" to="(920,180)"/>
+  </circuit>
+</project>

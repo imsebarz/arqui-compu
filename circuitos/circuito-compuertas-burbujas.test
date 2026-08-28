@@ -1,0 +1,6 @@
+# Tabla exhaustiva esperada: C = A AND B
+A B C
+0 0 0
+0 1 0
+1 0 0
+1 1 1

@@ -1,0 +1,9 @@
+interface:
+  display_name: "Logisim Circuit Engineer"
+  short_description: "Design and verify Logisim circuits"
+  default_prompt: "Use $logisim-circuit-engineer to design and verify a Logisim Evolution circuit."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "logisim_evolution"
+      description: "Native-backed Logisim project generation and verification tools"

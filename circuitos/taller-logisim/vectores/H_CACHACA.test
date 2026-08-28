@@ -1,0 +1,10 @@
+# Ejercicio h — CACHACA: tabla exhaustiva de 8 combinaciones
+A B C CACHACA
+0 0 0 1
+0 0 1 0
+0 1 0 1
+0 1 1 1
+1 0 0 1
+1 0 1 1
+1 1 0 0
+1 1 1 1
